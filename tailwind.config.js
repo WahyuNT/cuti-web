@@ -1,12 +1,18 @@
 // tailwind.config.js
 module.exports = {
-    purge: [],
-    darkMode: false, // or 'media' or 'class'
+    content: [
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
+    ],
     theme: {
-        extend: {},
-    },
-    variants: {
-        extend: {},
+        extend: {
+            colors: {
+                "brand-orange": "#f9981b",
+                "brand-dark": "#1a1a1a",
+                "brand-light": "#f9fafb",
+            },
+        },
     },
     plugins: [],
 };

@@ -6,16 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     @stack('styles') {{-- buat custom CSS per page --}}
 </head>
 
-<body>
+<body style="background-color: #f5f5f5 !important;">
 
-    <div class="flex h-screen bg-gray-100">
+    <div class="flex h-screen ">
         @include('partials.sidebar')
         <div class="flex flex-col flex-1 overflow-y-auto">
             @include('partials.navbar')
-            <div class="px-4 pt-18 pb-10 mt-0">
+            <div class="pt-10 mt-8 px-0">
                 @yield('content')
             </div>
         </div>

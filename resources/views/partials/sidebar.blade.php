@@ -1,7 +1,7 @@
    <aside id="default-sidebar"
-       class="flex bg-white z-10 top-0 left-0 shadow-md border-r-1 border-gray-200  h-screen transition-transform -translate-x-full sm:translate-x-0"
+       class="flex bg-white z-10 top-0 left-0  border-r-1 border-gray-200  h-screen transition-transform -translate-x-full sm:translate-x-0"
        aria-label="Sidebar">
-       <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50">
+       <div class="h-full px-3 py-4 overflow-y-auto bg-white">
 
            <a href="https://flowbite.com" class="flex mr-4">
                <img src="https://flowbite.s3.amazonaws.com/logo.svg" class="mr-3 h-8" alt="FlowBite Logo" />
