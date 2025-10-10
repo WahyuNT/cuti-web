@@ -19,7 +19,7 @@
         <div class="flex flex-col flex-1 overflow-y-auto">
             @include('partials.navbar')
             <div class="pt-10 mt-8 px-5 ">
-                @yield('content')
+                {{-- @yield('content') --}}
             </div>
         </div>
 

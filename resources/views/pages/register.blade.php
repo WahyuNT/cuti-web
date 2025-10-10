@@ -10,24 +10,12 @@
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     @stack('styles') {{-- buat custom CSS per page --}}
+    @livewireStyles
 </head>
 
-<body style="background-color: #f3f8fa !important;">
-
-    <div class="flex h-screen ">
-        @include('partials.sidebar')
-        <div class="flex flex-col flex-1 overflow-y-auto">
-            @include('partials.navbar')
-            <div class="pt-10 mt-8 px-5 ">
-                @yield('content')
-            </div>
-        </div>
-
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @stack('scripts')
+<body>
+    @livewire('register')
+    @livewireScripts
 </body>
 
 </html>
