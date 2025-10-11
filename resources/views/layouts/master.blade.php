@@ -10,6 +10,7 @@
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>@yield('title', 'Cuti Web')</title>
+    @livewireStyles
     @stack('styles') {{-- buat custom CSS per page --}}
 </head>
 
@@ -23,11 +24,11 @@
                 @yield('content')
             </div>
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @livewireScripts
     @stack('scripts')
 </body>
 

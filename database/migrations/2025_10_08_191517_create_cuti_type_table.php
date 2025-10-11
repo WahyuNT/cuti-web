@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('deskripsi')->nullable();
-            $table->integer('kuota')->nullable();
             $table->enum('status', ['active', 'inactive']);
             $table->boolean('is_count')->default(0);
             $table->timestamps();

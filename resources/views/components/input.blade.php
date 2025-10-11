@@ -1,0 +1,32 @@
+@props([
+    'label' => '',
+    'for' => '',
+    'name' => '',
+    'type' => 'text',
+    'placeholder' => '',
+    'wire' => '',
+    'required' => false,
+])
+
+<div>
+    @if ($label)
+        <label for="{{ $for }}" class="block mb-2 text-sm font-medium text-gray-900">
+            {{ $label }}
+            @if ($required)
+                <span class="text-red-500">*</span>
+            @endif
+        </label>
+    @endif
+
+    <input
+        {{ $attributes->merge([
+            'class' =>
+                'bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+        ]) }}
+        @if ($wire) wire:model.defer="{{ $wire }}" @endif type="{{ $type }}"
+        id="{{ $for }}" placeholder="{{ $placeholder }}" @if ($required) required @endif />
+
+    @error($wire)
+        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+    @enderror
+</div>

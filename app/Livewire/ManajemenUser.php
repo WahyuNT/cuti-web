@@ -3,21 +3,36 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use App\Services\CrudService;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Component;
+use Livewire\WithPagination;
+
+use function Psy\debug;
 
 class ManajemenUser extends Component
 {
+    use WithPagination;
     public $title = 'Manajemen User';
     public $mode = 'view';
     public $editId = null;
+    public $deleteId = null;
+    public $filter = null;
     public $name, $nip, $password, $role_id, $jabatan, $nomor_wa;
 
 
     public function render()
     {
-        $user = User::all();
-        return view('livewire.manajemen-user', compact('user'))->extends('layouts.master');
+        $data = User::when(!empty($this->filter), function ($query) {
+            $query->where(function ($subquery) {
+                $subquery->where('name', 'like', '%' . $this->filter . '%')
+                    ->orWhere('nip', 'like', '%' . $this->filter . '%')
+                    ->orWhere('jabatan', 'like', '%' . $this->filter . '%')
+                    ->orWhere('nomor_wa', 'like', '%' . $this->filter . '%');
+            });
+        })->paginate(10);
+
+        return view('livewire.manajemen-user', compact('data'))->extends('layouts.master');
     }
     public function toggleMode()
     {
@@ -27,57 +42,47 @@ class ManajemenUser extends Component
     {
         $this->mode = 'view';
         $this->resetValidation();
+         $this->editId = null;
         $this->reset(['name', 'nip', 'password', 'role_id', 'jabatan', 'nomor_wa']);
     }
-    public function create()
+    public function create(CrudService $crud)
     {
         $this->validate([
             'name' => 'required|string|max:255',
             'nip' => 'required|string|max:20|unique:users,nip',
             'password' => 'required|string|min:8',
             'role_id' => 'required|integer',
-            'jabatan' => 'required|string|max:100',
+            'jabatan' => 'required|integer',
             'nomor_wa' => 'required|string|max:15',
         ]);
 
-        $user = new User();
-        $user->name = $this->name;
-        $user->nip = $this->nip;
-        $user->password = bcrypt($this->password);
-        $user->role_id = $this->role_id;
-        $user->jabatan = $this->jabatan;
-        $user->nomor_wa = $this->nomor_wa;
-        $user->save();
+        $data = [
+            'name' => $this->name,
+            'nip' => $this->nip,
+            'password' => bcrypt($this->password),
+            'role_id' => $this->role_id,
+            'jabatan' => $this->jabatan,
+            'nomor_wa' => $this->nomor_wa,
+        ];
 
-        if ($user->save()) {
-            LivewireAlert::title('User Berhasil Dibuat!')
-                ->position('top-end')
-                ->toast()
-                ->success()
-                ->show();
-            $this->resetInput();
-        } else {
-            LivewireAlert::title('User Gagal Dibuat!')
-                ->position('top-end')
-                ->toast()
-                ->error()
-                ->show();
-        }
-
+        $crud->create(User::class, $data, 'User berhasil dibuat!', 'Gagal membuat user.');
         $this->resetInput();
     }
-    public function edit($id)
+    public function edit($id, CrudService $crud)
     {
-        $user = User::findOrFail($id);
-        $this->name = $user->name;
-        $this->nip = $user->nip;
-        $this->role_id = $user->role_id;
-        $this->jabatan = $user->jabatan;
-        $this->nomor_wa = $user->nomor_wa;
-        $this->mode = 'edit';
-        $this->editId = $id;
+        $user = $crud->find(User::class, $id);
+
+        if ($user) {
+            $this->name = $user->name;
+            $this->nip = $user->nip;
+            $this->role_id = $user->role_id;
+            $this->jabatan = $user->jabatan;
+            $this->nomor_wa = $user->nomor_wa;
+            $this->mode = 'edit';
+            $this->editId = $id;
+        }
     }
-    public function update()
+    public function update(CrudService $crud)
     {
         $this->validate([
             'name' => 'required|string|max:255',
@@ -87,28 +92,25 @@ class ManajemenUser extends Component
             'nomor_wa' => 'required|string|max:15',
         ]);
 
-        $user = User::findOrFail($this->editId);
-        $user->name = $this->name;
-        $user->nip = $this->nip;
-        $user->role_id = $this->role_id;
-        $user->jabatan = $this->jabatan;
-        $user->nomor_wa = $this->nomor_wa;
-        $user->save();
+        $data = [
+            'name' => $this->name,
+            'nip' => $this->nip,
+            'role_id' => $this->role_id,
+            'jabatan' => $this->jabatan,
+            'nomor_wa' => $this->nomor_wa,
+        ];
 
-        if ($user->save()) {
-            LivewireAlert::title('User Berhasil Dieprbarui!')
-                ->position('top-end')
-                ->toast()
-                ->success()
-                ->show();
+        $crud->update(User::class, $this->editId, $data, 'User berhasil diperbarui!', 'Gagal memperbarui user.');
+        $this->resetInput();
+    }
 
-            $this->resetInput();
-        } else {
-            LivewireAlert::title('User Gagal Dieprbarui!')
-                ->position('top-end')
-                ->toast()
-                ->error()
-                ->show();
-        }
+    public function delete($id, CrudService $crud)
+    {
+        $crud->delete(User::class, $id, 'User berhasil dihapus!', 'Gagal menghapus user.');
+        $this->resetInput();
+    }
+    public function updatedFilter()
+    {
+        $this->resetPage();
     }
 }

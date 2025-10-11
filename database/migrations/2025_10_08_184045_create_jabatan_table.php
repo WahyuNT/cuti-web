@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('jabatan', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->enum('status', ['aktif', 'nonaktif']);
+            $table->string('name');
+            $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
         });
     }
