@@ -46,13 +46,13 @@
                                 <td class="">
                                     <button
                                         class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none 
-                                    focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:cursor-pointer">
-                                        Edit
+                                    focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-1.5 py-1.5 text-center hover:cursor-pointer">
+                                        <i class="fa-solid fa-pen"></i>
                                     </button>
                                     <button
                                         class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none 
-                                    focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:cursor-pointer">
-                                        Hapus
+                                    focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-1.5 py-1.5 text-center hover:cursor-pointer">
+                                        <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -62,9 +62,6 @@
                     </tbody>
                 </table>
             </div>
-
-
-
         </div>
     @elseif($mode == 'edit')
         <div class="w-full">
