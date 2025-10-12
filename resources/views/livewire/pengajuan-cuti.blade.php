@@ -16,7 +16,6 @@
         <x-textarea label="Alasan" for="alasan" wire="alasan" type="text" placeholder="Masukkan Alasan"
             :required="true" rows="5" />
         <div class="mt-3">
-
             <x-button wire:click="create" bg="[var(--primary)]" label="Submit" />
         </div>
     </div>
