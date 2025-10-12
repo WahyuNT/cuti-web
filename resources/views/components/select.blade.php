@@ -21,13 +21,11 @@
     <select
         {{ $attributes->merge([
             'class' =>
-                'bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                'bg-gray-50 border border-gray-200 text-gray-900 text-sm mb-3 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
         ]) }}
-        id="{{ $for }}"
-        name="{{ $name }}"
+        id="{{ $for }}" name="{{ $name }}"
         @if ($wire) wire:model.defer="{{ $wire }}" @endif
-        @if ($required) required @endif
-    >
+        @if ($required) required @endif>
         <option value="">{{ $placeholder }}</option>
 
         @foreach ($options as $value => $text)

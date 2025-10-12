@@ -3,6 +3,7 @@
 @section('title', 'Manajemen Web')
 
 @section('content')
+
     <div class="bg-white rounded-xl p-4 mb-2">
         @livewire('manajemen-cuti')
     </div>
@@ -22,6 +23,6 @@
             @livewire('manajemen-tanggal-merah')
         </div>
     </div>
-   
+
 
 @endsection

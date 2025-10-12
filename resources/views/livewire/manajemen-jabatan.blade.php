@@ -1,4 +1,5 @@
 <div class="bg-white rounded-xl p-4">
+    
     @if ($mode == 'view')
 
         <div class="w-full">
@@ -8,10 +9,10 @@
             <div class="w-full flex items-end gap-2 mt-4">
                 <div class="flex-1">
 
-                    <div class="relative">
+                <div class="relative">
                         <i
                             class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                        <input wire:model.live="filter" type="text" placeholder="Masukkan Nama atau Deskripsi"
+                        <input wire:model.live="filter" type="text" placeholder="Masukkan Nama Jabatan"
                             class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 pr-3 py-2" />
                     </div>
                 </div>
