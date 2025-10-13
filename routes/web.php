@@ -7,6 +7,8 @@ use App\Livewire\PengajuanCuti;
 use App\Livewire\PengajuanIzin;
 use App\Livewire\RiwayatCuti;
 use App\Livewire\RiwayatIzin;
+use App\Livewire\PermohonanIzin;
+use App\Livewire\PermohonanCuti;
 
 Route::get('/login', [AuthController::class, 'indexLogin'])->name('login');
 Route::post('/login-store', [AuthController::class, 'loginStore'])->name('login-store');
@@ -20,7 +22,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pengajuan-izin', PengajuanIzin::class)->name('pengajuan-izin');
     Route::get('/riwayat-cuti', RiwayatCuti::class)->name('riwayat-cuti');
     Route::get('/riwayat-izin', RiwayatIzin::class)->name('riwayat-izin');
+    Route::get('/permohonan-cuti', PermohonanCuti::class)->name('permohonan-cuti');
+    Route::get('/permohonan-izin', PermohonanIzin::class)->name('permohonan-izin');
     Route::view('/manajemen-web', 'pages.manajemen-web')->name('manajemen-web');
-    Route::view('/permohonan-cuti', 'pages.permohonan-cuti')->name('permohonan-cuti');
-    Route::view('/permohonan-izin', 'pages.permohonan-izin')->name('permohonan-izin');
 });

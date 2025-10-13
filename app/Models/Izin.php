@@ -24,4 +24,8 @@ class Izin extends Model
     {
         return $this->belongsTo(IzinType::class);
     }
+        public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

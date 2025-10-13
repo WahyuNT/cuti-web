@@ -65,8 +65,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-    public function cuti()
+    public function izin()
     {
-        return $this->hasMany(Cuti::class);
+        return $this->hasMany(Izin::class);
     }
 }
