@@ -5,6 +5,7 @@
     'type' => 'text',
     'placeholder' => '',
     'wire' => '',
+    'wireType' => 'defer',
     'required' => false,
 ])
 
@@ -18,13 +19,13 @@
         </label>
     @endif
 
-    <input
+    <input type="{{ $type }}" id="{{ $for }}" name="{{ $name }}" placeholder="{{ $placeholder }}"
+        @if ($wire) wire:model.{{ $wireType }}="{{ $wire }}" @endif
+        @if ($required) required @endif
         {{ $attributes->merge([
             'class' =>
-                'bg-gray-50 border border-gray-200 mb-3 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
-        ]) }}
-        @if ($wire) wire:model.defer="{{ $wire }}" @endif type="{{ $type }}"
-        id="{{ $for }}" placeholder="{{ $placeholder }}" @if ($required) required @endif />
+                'bg-gray-50 border border-gray-200 mb-3 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+        ]) }} />
 
     @error($wire)
         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

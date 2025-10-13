@@ -3,6 +3,7 @@
     'for' => '',
     'name' => '',
     'wire' => '',
+    'wireType' => 'defer',
     'options' => [],
     'placeholder' => 'Pilih salah satu...',
     'required' => false,
@@ -24,7 +25,7 @@
                 'bg-gray-50 border border-gray-200 text-gray-900 text-sm mb-3 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
         ]) }}
         id="{{ $for }}" name="{{ $name }}"
-        @if ($wire) wire:model.defer="{{ $wire }}" @endif
+        @if ($wire) wire:model.{{ $wireType }}="{{ $wire }}" @endif
         @if ($required) required @endif>
         <option value="">{{ $placeholder }}</option>
 
