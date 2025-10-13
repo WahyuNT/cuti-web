@@ -19,4 +19,9 @@ class Izin extends Model
         'sampai_pukul',
         'status',
     ];
+
+    public function izinType()
+    {
+        return $this->belongsTo(IzinType::class);
+    }
 }
