@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal');
             $table->string('keterangan');
+            $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
         });
     }
