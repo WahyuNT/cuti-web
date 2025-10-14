@@ -46,8 +46,8 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('pengajuan-izin') }}"
-                    class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group {{ request()->routeIs('pengajuan-izin') ? 'bg-gray-100' : '' }}">
+                <a href="{{ route('riwayat-izin') }}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group {{ request()->routeIs('riwayat-izin') ? 'bg-gray-100' : '' }}">
                     <i class="fa-solid fa-clock-rotate-left"></i>
                     <span class="flex-1 ms-3 whitespace-nowrap">Riwayat Izin</span>
                 </a>
