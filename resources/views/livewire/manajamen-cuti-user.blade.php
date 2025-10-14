@@ -328,41 +328,57 @@
                         @else
                             <div class="flex gap-4 mt-2">
                                 <div class="w-1/2">
-                                    <table class="min-w-full divide-y border">
-                                        <thead>
+                                    <table class="w-full text-sm text-left text-gray-700 overflow-hidden">
+                                        <thead class="text-xs text-gray-700 uppercase bg-gray-100 rounded-t-xl">
                                             <tr>
-                                                <th class="text-center py-2">Tanggal</th>
+                                                <th scope="col" class="px-6 py-3 text-center">Tanggal</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($dataMapped as $index => $item)
-                                                <tr style="height:50px;">
-                                                    <td class="p-2 text-center align-middle">
-                                                        <h6 class="m-0">{{ $item['tanggal'] ?? '-' }}</h6>
-                                                    </td>
+                                            @forelse ($dataMapped as $index => $item)
+                                                <tr class="odd:bg-white even:bg-gray-50 text-center">
+                                                    <td class="px-6 py-4">{{ $item['tanggal'] ?? '-' }}</td>
                                                 </tr>
-                                            @endforeach
+                                            @empty
+                                                <tr>
+                                                    <td class="text-center py-3" colspan="6">Data Tidak Ada</td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
 
                                 <div class="w-1/2">
-                                    <table class="min-w-full divide-y border">
-                                        <thead>
+         
+                                    <table class="w-full text-sm text-left text-gray-700 overflow-hidden">
+                                        <thead class="text-xs text-gray-700 uppercase bg-gray-100 rounded-t-xl">
                                             <tr>
-                                                <th class="text-center py-2">Kuota Terpakai</th>
+                                                <th scope="col" class="px-6 py-3 text-center">Kuota Terpakai</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($dataMapped as $index => $item)
+                                            @forelse ($dataMapped as $index => $item)
                                                 <tr style="height:50px;">
                                                     <td class="p-2 text-center align-middle">
-                                                        <x-select label="Tahun" for="tahunFilter" wire="tahunFilter"
-                                                            wireType="change" placeholder="Semua Tahun"
-                                                            :options="$tahunData" />
+                                                        <select wire:model="dataMapped.{{ $index }}.kuota_used"
+                                                            name="tahun"
+                                                            class="block w-full rounded border px-2 py-1 text-sm">
+                                                            <option value="" disabled>Pilih Tahun</option>
+                                                            @forelse ($tahunDataMapped as $item)
+                                                                <option value="{{ $item->tahun }}">
+                                                                    {{ $item->tahun }}</option>
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                            @empty
+                                                <tr>
+                                                    <td class="text-center py-3" colspan="1">Data Tidak Ada</td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

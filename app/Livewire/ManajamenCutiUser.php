@@ -9,6 +9,7 @@ use App\Models\Tahun;
 use App\Models\User;
 use App\Models\ViewCutiKuota;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
 class ManajamenCutiUser extends Component
 {
@@ -38,6 +39,14 @@ class ManajamenCutiUser extends Component
     public $tahunRiwayat;
     public $modeRiwayat = 'view';
 
+    private function showAlert(string $type, string $message)
+    {
+        LivewireAlert::title($message)
+            ->position('top-end')
+            ->toast()
+            ->{$type}()
+            ->show();
+    }
 
     public function mount($id)
     {
@@ -63,8 +72,10 @@ class ManajamenCutiUser extends Component
         $tahunData = Tahun::where('status', 'active')
             ->pluck('tahun', 'tahun')
             ->toArray();
-            
-        return view('livewire.manajamen-cuti-user', compact('viewCutiKuotaReguler', 'cutiTypes', 'dataCutiTahunan', 'tahunData', 'riwayatCuti', 'viewCutiKuotaTahunan'));
+
+        $tahunDataMapped =  Tahun::where('status', 'active')->get();
+
+        return view('livewire.manajamen-cuti-user', compact('viewCutiKuotaReguler', 'cutiTypes', 'dataCutiTahunan', 'tahunData', 'riwayatCuti', 'viewCutiKuotaTahunan', 'tahunDataMapped'));
     }
     public function confirmDelete($id)
     {
@@ -78,9 +89,7 @@ class ManajamenCutiUser extends Component
     {
         $data = CutiUser::find($id);
         if ($data->delete()) {
-            $this->alert('success', 'Berhasil Dihapus', [
-                'position' => 'center'
-            ]);
+            $this->showAlert('success',  'Data berhasil dihapus!');
         }
     }
     public function edit($id)
@@ -121,14 +130,10 @@ class ManajamenCutiUser extends Component
         ]);
 
         if ($data->save()) {
-            $this->alert('success', 'Data Berhasil Ditambahkan', [
-                'position' => 'center'
-            ]);
+            $this->showAlert('success', $successMessage ?? 'Data Berhasil Ditambahkan!');
             $this->resetInput();
         } else {
-            $this->alert('error', 'Data Gagal Ditambahkan', [
-                'position' => 'center'
-            ]);
+            $this->showAlert('error', $successMessage ?? 'Data Gagal Ditambahkan!');
         }
     }
     public function update()
@@ -147,15 +152,12 @@ class ManajamenCutiUser extends Component
         $data->tahun = $this->tahun;
 
         if ($data->save()) {
-            $this->alert('success', 'Data Berhasil Diperbarui', [
-                'position' => 'center'
-            ]);
+
+            $this->showAlert('success', 'Data Berhasil Diperbarui');
             $this->resetInput();
             $this->mode = 'view';
         } else {
-            $this->alert('error', 'Data Gagal Diperbarui', [
-                'position' => 'center'
-            ]);
+            $this->showAlert('error', 'Data Gagal Diperbarui');
         }
     }
     public function mappingKuotaUsed($kuota_used)
@@ -193,9 +195,7 @@ class ManajamenCutiUser extends Component
 
         $this->backView();
 
-        $this->alert('success', 'Data Berhasil Diperbarui', [
-            'position' => 'center'
-        ]);
+        $this->showAlert('success', 'Data Berhasil Diperbarui');
     }
     public function backView()
     {
