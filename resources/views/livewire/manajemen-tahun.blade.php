@@ -95,7 +95,7 @@
             @if ($editId == null)
                 <h2 class="text-2xl font-bold text-center">Tambah Tahun Baru</h2>
             @else
-                <h2 class="text-2xl font-bold text-center">Edit Data {{ $name }}</h2>
+                <h2 class="text-2xl font-bold text-center">Edit Data {{ $tahun }}</h2>
             @endif
         </div>
         <div class="w-full mt-4">

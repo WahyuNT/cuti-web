@@ -34,6 +34,7 @@
                                 <th scope="col" class="px-6 py-3">Role</th>
                                 <th scope="col" class="px-6 py-3">Jabatan</th>
                                 <th scope="col" class="px-6 py-3">Nomor WA</th>
+                                <th scope="col" class="px-6 py-3 text-center">Setting Cuti</th>
                                 <th scope="col" class="px-6 py-3 text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -45,6 +46,15 @@
                                     <td class="px-6 py-4">{{ $item->role_id }}</td>
                                     <td class="px-6 py-4">{{ $item->jabatan }}</td>
                                     <td class="px-6 py-4">{{ $item->nomor_wa }}</td>
+                                    <td class="text-center justify-center">
+
+                                        <a href="{{ route('manajemen-cuti-user', ['id' => $item->id]) }}">
+                                            <button type="button"
+                                                class="text-white bg-[var(--info)] hover:brightness-90 font-medium rounded-lg text-sm w-full sm:w-auto px-1.5 py-1.5 text-center hover:cursor-pointer hover:scale-102 transition-transform duration-200">
+                                                <i class="fa-solid fa-gear"></i>
+                                            </button>
+                                        </a>
+                                    </td>
                                     <td class="text-center justify-center">
                                         @if ($deleteId != $item->id)
                                             <div class="flex flex-row gap-1 justify-center">

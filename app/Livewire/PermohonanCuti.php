@@ -57,6 +57,7 @@ class PermohonanCuti extends Component
     {
         $this->resetPage();
     }
+
     public function updatedCutiType()
     {
         $this->resetPage();

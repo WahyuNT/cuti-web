@@ -9,7 +9,6 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Register extends Component
 {
-    use LivewireAlert;
     public $nip;
     public $password;
     public $name;
