@@ -43,8 +43,8 @@
                                 <tr class="odd:bg-white even:bg-gray-50">
                                     <td class="px-6 py-4">{{ $item->name }}</td>
                                     <td class="px-6 py-4">{{ $item->nip }}</td>
-                                    <td class="px-6 py-4">{{ $item->role_id }}</td>
-                                    <td class="px-6 py-4">{{ $item->jabatan }}</td>
+                                    <td class="px-6 py-4">{{ $item->role }}</td>
+                                    <td class="px-6 py-4">{{ $item->jabatan->name }}</td>
                                     <td class="px-6 py-4">{{ $item->nomor_wa }}</td>
                                     <td class="text-center justify-center">
 
@@ -105,73 +105,36 @@
         <div class="w-full mt-4">
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">
-                        Nama
-                    </label>
-                    <input wire:model.defer="name" type="text" placeholder="Nama User" required
-                        class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
-                    @error('name')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
+                    <x-input label="Nama" for="name" wire="name" type="text" placeholder="Deskripsi"
+                        :required="true" />
                 </div>
 
                 <div>
-                    <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900">
-                        NIP
-                    </label>
-                    <input wire:model.defer="nip" type="text" placeholder="NIP User" required
-                        class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
-                    @error('nip')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
+                    <x-input label="NIP" for="nip" wire="nip" type="text" placeholder="Deskripsi"
+                        :required="true" />
                 </div>
 
                 <div>
-                    <label for="role" class="block mb-2 text-sm font-medium text-gray-900">
-                        Role
-                    </label>
-                    <select wire:model.defer="role_id"
-                        class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option value="">Pilih Role</option>
-                        <option value="0">Admin</option>
-                        <option value="1">User</option>
-                    </select>
-                    @error('role_id')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
+                    <x-select label="Role" for="role" wire="role" wireType="change" placeholder="Semua role"
+                        :options="[
+                            'USER' => 'User',
+                            'ADMIN' => 'Admin',
+                            'SUPERADMIN' => 'Superadmin',
+                        ]" :required="true" />
                 </div>
 
                 <div>
-                    <label for="jabatan" class="block mb-2 text-sm font-medium text-gray-900">
-                        Jabatan
-                    </label>
-                    <input wire:model.defer="jabatan" type="text" placeholder="Jabatan User" required
-                        class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
-                    @error('jabatan')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
+                    <x-select label="Semua Jabatan" for="jabatan" wire="jabatan" wireType="change"
+                        placeholder="Semua Tahun" :options="$jabatanData" :required="true" />
                 </div>
 
                 <div>
-                    <label for="nomor_wa" class="block mb-2 text-sm font-medium text-gray-900">
-                        Nomor WA
-                    </label>
-                    <input wire:model.defer="nomor_wa" type="text" placeholder="Nomor WA User" required
-                        class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
-                    @error('nomor_wa')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
+                    <x-input label="Nomor WA" for="nomor_wa" wire="nomor_wa" type="text" placeholder="Nomor WA" />
                 </div>
 
                 <div>
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900">
-                        Password
-                    </label>
-                    <input wire:model.defer="password" type="password" placeholder="Password User" required
-                        class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
-                    @error('password')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
+                    <x-input label="Password" for="password" wire="password" type="text" placeholder="Password"
+                        type="password" />
                 </div>
 
                 <div class="col-span-2 flex justify-center items-end gap-2">

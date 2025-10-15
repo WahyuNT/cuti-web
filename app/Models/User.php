@@ -69,4 +69,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Izin::class);
     }
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class, 'jabatan_id');
+    }
 }

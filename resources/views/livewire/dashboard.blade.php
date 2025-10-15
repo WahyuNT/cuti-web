@@ -2,12 +2,12 @@
     <div class="bg-white rounded-xl p-4">
         <!-- Header -->
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <h2 class="text-2xl font-bold tracking-tight">Hak Cuti</h2>
+            <h2 class="text-2xl font-semibold tracking-tight">Hak Cuti</h2>
         </div>
         <div class="mt-4 mb-6 flex flex-row gap-4">
             <!-- Tabel Tahun/Sisa -->
             <div class="w-auto">
-                <div class="rounded-xl border border-gray-300 bg-white p-2 ">
+                <div class="rounded-xl border border-gray-300 bg-gray-50 p-2 ">
                     <div class="div">
                         <table class="min-w-full text-sm border-0">
                             <thead>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="flex-1">
-                <div class="rounded-xl border border-gray-300 bg-white p-4">
+                <div class="rounded-xl border border-gray-300 bg-gray-50 p-4">
                     <div class="grid grid-cols-3 ps-3 font-semibold text-gray-600  pb-2 text-sm">
                         <div class="text-left">Tipe Cuti</div>
                         <div class="text-center">Sisa</div>
@@ -63,95 +63,231 @@
 
         </div>
 
-        <h2 class="text-2xl font-semibold mb-3">Riwayat <span class="font-extrabold">Cuti</span></h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
-                <div class="px-4 py-3 shadow bg-red-500 flex items-center justify-between">
-                    <h4 class="font-semibold text-white text-xl">Ditolak</h4>
-                    <h4 class="font-semibold text-white text-xl">{{ $CutiFailed }}</h4>
+
+
+        <div class="p-3 border rounded-xl bg-gray-50 border-gray-300 mb-3">
+            <!-- Riwayat Cuti -->
+            <h2 class="text-2xl font-semibold mb-3">Riwayat Cuti</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    <div class="px-4 py-3 shadow bg-[var(--danger)] flex items-center justify-between">
+                        <h4 class="font-semibold text-white text-xl">Ditolak</h4>
+                        <h4 class="font-semibold text-white text-xl">{{ $CutiFailed }}</h4>
+                    </div>
+
+                    <div class="p-4 flex items-center justify-between">
+                        <h5 class="font-medium text-lg">Rincian</h5>
+                        <a href="{{ route('riwayat-cuti', ['status' => 'failed']) }}">
+                            <button>
+                                <i
+                                    class="fa-regular cursor-pointer hover:scale-110  text-[var(--danger)] fa-xl fa-circle-right"></i>
+                            </button>
+                        </a>
+
+                    </div>
                 </div>
+                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    <div class="px-4 py-3 shadow bg-[var(--warning)] flex items-center justify-between">
+                        <h4 class="font-semibold text-white text-xl">Dalam Proses</h4>
+                        <h4 class="font-semibold text-white text-xl">{{ $CutiPending }}</h4>
+                    </div>
 
-                <div class="p-4 flex items-center justify-between">
-                    <h5 class="font-medium text-lg">Rincian</h5>
-                    <button>
-                        <i class="fa-regular cursor-pointer hover:scale-110  text-red-500 fa-xl fa-circle-right"></i>
-                    </button>
+                    <div class="p-4 flex items-center justify-between">
+                        <h5 class="font-medium text-lg">Rincian</h5>
+                        <a href="{{ route('riwayat-cuti', ['status' => 'pending']) }}">
+                            <button>
+                                <i
+                                    class="fa-regular cursor-pointer hover:scale-110  text-[var(--warning)] fa-xl fa-circle-right"></i>
+                            </button>
+                        </a>
 
+                    </div>
+                </div>
+                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    <div class="px-4 py-3 shadow bg-[var(--success)] flex items-center justify-between">
+                        <h4 class="font-semibold text-white text-xl">Diterima</h4>
+                        <h4 class="font-semibold text-white text-xl">{{ $CutiSuccess }}</h4>
+                    </div>
+
+                    <div class="p-4 flex items-center justify-between">
+                        <h5 class="font-medium text-lg">Rincian</h5>
+                        <a href="{{ route('riwayat-cuti', ['status' => 'success']) }}">
+                            <button>
+                                <i
+                                    class="fa-regular cursor-pointer hover:scale-110  text-[var(--success)] fa-xl fa-circle-right"></i>
+                            </button>
+                        </a>
+
+                    </div>
                 </div>
             </div>
-            <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
-                <div class="px-4 py-3 shadow bg-[#f9981b] flex items-center justify-between">
-                    <h4 class="font-semibold text-white text-xl">Dalam Proses</h4>
-                    <h4 class="font-semibold text-white text-xl">{{ $CutiPending }}</h4>
+
+            <!-- Riwayat Izin -->
+            <h2 class="text-2xl font-semibold mb-3">Riwayat Izin</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    <div class="px-4 py-3 shadow bg-[var(--danger)] flex items-center justify-between">
+                        <h4 class="font-semibold text-white text-xl">Ditolak</h4>
+                        <h4 class="font-semibold text-white text-xl">{{ $IzinFailed }}</h4>
+                    </div>
+
+                    <div class="p-4 flex items-center justify-between">
+                        <h5 class="font-medium text-lg">Rincian</h5>
+                        <a href="{{ route('riwayat-izin', ['status' => 'failed']) }}">
+                            <button>
+                                <i
+                                    class="fa-regular cursor-pointer hover:scale-110  text-[var(--danger)] fa-xl fa-circle-right"></i>
+                            </button>
+                        </a>
+
+                    </div>
                 </div>
+                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    <div class="px-4 py-3 shadow bg-[var(--warning)] flex items-center justify-between">
+                        <h4 class="font-semibold text-white text-xl">Dalam Proses</h4>
+                        <h4 class="font-semibold text-white text-xl">{{ $IzinPending }}</h4>
+                    </div>
 
-                <div class="p-4 flex items-center justify-between">
-                    <h5 class="font-medium text-lg">Rincian</h5>
-                    <button>
-                        <i class="fa-regular cursor-pointer hover:scale-110  text-[#f9981b] fa-xl fa-circle-right"></i>
-                    </button>
+                    <div class="p-4 flex items-center justify-between">
+                        <h5 class="font-medium text-lg">Rincian</h5>
+                        <a href="{{ route('riwayat-izin', ['status' => 'failed']) }}">
+                            <button>
+                                <i
+                                    class="fa-regular cursor-pointer hover:scale-110  text-[var(--warning)] fa-xl fa-circle-right"></i>
+                            </button>
+                        </a>
 
+                    </div>
                 </div>
-            </div>
-            <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
-                <div class="px-4 py-3 shadow bg-green-500 flex items-center justify-between">
-                    <h4 class="font-semibold text-white text-xl">Diterima</h4>
-                    <h4 class="font-semibold text-white text-xl">{{ $CutiSuccess }}</h4>
-                </div>
+                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    <div class="px-4 py-3 shadow bg-[var(--success)] flex items-center justify-between">
+                        <h4 class="font-semibold text-white text-xl">Diterima</h4>
+                        <h4 class="font-semibold text-white text-xl">{{ $IzinSuccess }}</h4>
+                    </div>
 
-                <div class="p-4 flex items-center justify-between">
-                    <h5 class="font-medium text-lg">Rincian</h5>
-                    <button>
-                        <i class="fa-regular cursor-pointer hover:scale-110  text-green-500 fa-xl fa-circle-right"></i>
-                    </button>
+                    <div class="p-4 flex items-center justify-between">
+                        <h5 class="font-medium text-lg">Rincian</h5>
+                        <a href="{{ route('riwayat-izin', ['status' => 'success']) }}">
+                            <button>
+                                <i
+                                    class="fa-regular cursor-pointer hover:scale-110  text-[var(--success)] fa-xl fa-circle-right"></i>
+                            </button>
+                        </a>
 
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Riwayat Izin -->
-        <h2 class="text-2xl font-semibold mb-3">Riwayat <span class="font-extrabold">Izin</span></h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
-                <div class="px-4 py-3 shadow bg-red-500 flex items-center justify-between">
-                    <h4 class="font-semibold text-white text-xl">Ditolak</h4>
-                    <h4 class="font-semibold text-white text-xl">{{ $IzinFailed }}</h4>
+        <div class="p-3 border rounded-xl bg-gray-50 border-gray-300">
+            <!-- Pengajuan cuti -->
+            <h2 class="text-2xl font-semibold mb-3">Pengajuan cuti</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    <div class="px-4 py-3 shadow bg-[var(--danger)] flex items-center justify-between">
+                        <h4 class="font-semibold text-white text-xl">Ditolak</h4>
+                        <h4 class="font-semibold text-white text-xl">{{ $IzinFailed }}</h4>
+                    </div>
+
+                    <div class="p-4 flex items-center justify-between">
+                        <h5 class="font-medium text-lg">Rincian</h5>
+                        <a href="{{ route('permohonan-cuti', ['status' => 'failed']) }}">
+                            <button>
+                                <i
+                                    class="fa-regular cursor-pointer hover:scale-110  text-[var(--danger)] fa-xl fa-circle-right"></i>
+                            </button>
+                        </a>
+
+                    </div>
                 </div>
+                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    <div class="px-4 py-3 shadow bg-[var(--warning)] flex items-center justify-between">
+                        <h4 class="font-semibold text-white text-xl">Dalam Proses</h4>
+                        <h4 class="font-semibold text-white text-xl">{{ $IzinPending }}</h4>
+                    </div>
 
-                <div class="p-4 flex items-center justify-between">
-                    <h5 class="font-medium text-lg">Rincian</h5>
-                    <button>
-                        <i class="fa-regular cursor-pointer hover:scale-110  text-red-500 fa-xl fa-circle-right"></i>
-                    </button>
+                    <div class="p-4 flex items-center justify-between">
+                        <h5 class="font-medium text-lg">Rincian</h5>
+                        <a href="{{ route('permohonan-cuti', ['status' => 'failed']) }}">
+                            <button>
+                                <i
+                                    class="fa-regular cursor-pointer hover:scale-110  text-[var(--warning)] fa-xl fa-circle-right"></i>
+                            </button>
+                        </a>
 
+                    </div>
+                </div>
+                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    <div class="px-4 py-3 shadow bg-[var(--success)] flex items-center justify-between">
+                        <h4 class="font-semibold text-white text-xl">Diterima</h4>
+                        <h4 class="font-semibold text-white text-xl">{{ $IzinSuccess }}</h4>
+                    </div>
+
+                    <div class="p-4 flex items-center justify-between">
+                        <h5 class="font-medium text-lg">Rincian</h5>
+                        <a href="{{ route('permohonan-cuti', ['status' => 'success']) }}">
+                            <button>
+                                <i
+                                    class="fa-regular cursor-pointer hover:scale-110  text-[var(--success)] fa-xl fa-circle-right"></i>
+                            </button>
+                        </a>
+
+                    </div>
                 </div>
             </div>
-            <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
-                <div class="px-4 py-3 shadow bg-[#f9981b] flex items-center justify-between">
-                    <h4 class="font-semibold text-white text-xl">Dalam Proses</h4>
-                    <h4 class="font-semibold text-white text-xl">{{ $IzinPending }}</h4>
+            <!-- Pengajuan Izin -->
+            <h2 class="text-2xl font-semibold mb-3">Pengajuan Izin</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    <div class="px-4 py-3 shadow bg-[var(--danger)] flex items-center justify-between">
+                        <h4 class="font-semibold text-white text-xl">Ditolak</h4>
+                        <h4 class="font-semibold text-white text-xl">{{ $IzinFailed }}</h4>
+                    </div>
+
+                    <div class="p-4 flex items-center justify-between">
+                        <h5 class="font-medium text-lg">Rincian</h5>
+                        <a href="{{ route('permohonan-izin', ['status' => 'failed']) }}">
+                            <button>
+                                <i
+                                    class="fa-regular cursor-pointer hover:scale-110  text-[var(--danger)] fa-xl fa-circle-right"></i>
+                            </button>
+                        </a>
+
+                    </div>
                 </div>
+                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    <div class="px-4 py-3 shadow bg-[var(--warning)] flex items-center justify-between">
+                        <h4 class="font-semibold text-white text-xl">Dalam Proses</h4>
+                        <h4 class="font-semibold text-white text-xl">{{ $IzinPending }}</h4>
+                    </div>
 
-                <div class="p-4 flex items-center justify-between">
-                    <h5 class="font-medium text-lg">Rincian</h5>
-                    <button>
-                        <i class="fa-regular cursor-pointer hover:scale-110  text-[#f9981b] fa-xl fa-circle-right"></i>
-                    </button>
+                    <div class="p-4 flex items-center justify-between">
+                        <h5 class="font-medium text-lg">Rincian</h5>
+                        <a href="{{ route('permohonan-izin', ['status' => 'failed']) }}">
+                            <button>
+                                <i
+                                    class="fa-regular cursor-pointer hover:scale-110  text-[var(--warning)] fa-xl fa-circle-right"></i>
+                            </button>
+                        </a>
 
+                    </div>
                 </div>
-            </div>
-            <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
-                <div class="px-4 py-3 shadow bg-green-500 flex items-center justify-between">
-                    <h4 class="font-semibold text-white text-xl">Diterima</h4>
-                    <h4 class="font-semibold text-white text-xl">{{ $IzinSuccess }}</h4>
-                </div>
+                <div class="rounded-xl border border-gray-200 bg-white overflow-hidden">
+                    <div class="px-4 py-3 shadow bg-[var(--success)] flex items-center justify-between">
+                        <h4 class="font-semibold text-white text-xl">Diterima</h4>
+                        <h4 class="font-semibold text-white text-xl">{{ $IzinSuccess }}</h4>
+                    </div>
 
-                <div class="p-4 flex items-center justify-between">
-                    <h5 class="font-medium text-lg">Rincian</h5>
-                    <button>
-                        <i class="fa-regular cursor-pointer hover:scale-110  text-green-500 fa-xl fa-circle-right"></i>
-                    </button>
+                    <div class="p-4 flex items-center justify-between">
+                        <h5 class="font-medium text-lg">Rincian</h5>
+                        <a href="{{ route('permohonan-izin', ['status' => 'success']) }}">
+                            <button>
+                                <i
+                                    class="fa-regular cursor-pointer hover:scale-110  text-[var(--success)] fa-xl fa-circle-right"></i>
+                            </button>
+                        </a>
 
+                    </div>
                 </div>
             </div>
         </div>

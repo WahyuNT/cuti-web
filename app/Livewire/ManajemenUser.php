@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Jabatan;
 use App\Models\User;
 use App\Services\CrudService;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
@@ -18,7 +19,7 @@ class ManajemenUser extends Component
     public $editId = null;
     public $deleteId = null;
     public $filter = null;
-    public $name, $nip, $password, $role_id, $jabatan, $nomor_wa;
+    public $name, $nip, $password, $role, $jabatan, $nomor_wa;
 
 
     public function render()
@@ -32,7 +33,10 @@ class ManajemenUser extends Component
             });
         })->paginate(10);
 
-        return view('livewire.manajemen-user', compact('data'))->extends('layouts.master');
+        $jabatanData = Jabatan::where('status', 'active')
+            ->pluck('name', 'id')
+            ->toArray();
+        return view('livewire.manajemen-user', compact('data', 'jabatanData'))->extends('layouts.master');
     }
     public function toggleMode()
     {
@@ -42,8 +46,8 @@ class ManajemenUser extends Component
     {
         $this->mode = 'view';
         $this->resetValidation();
-         $this->editId = null;
-        $this->reset(['name', 'nip', 'password', 'role_id', 'jabatan', 'nomor_wa']);
+        $this->editId = null;
+        $this->reset(['name', 'nip', 'password', 'role', 'jabatan', 'nomor_wa']);
     }
     public function create(CrudService $crud)
     {
@@ -51,7 +55,7 @@ class ManajemenUser extends Component
             'name' => 'required|string|max:255',
             'nip' => 'required|string|max:20|unique:users,nip',
             'password' => 'required|string|min:8',
-            'role_id' => 'required|integer',
+            'role' => 'required',
             'jabatan' => 'required|integer',
             'nomor_wa' => 'required|string|max:15',
         ]);
@@ -60,7 +64,7 @@ class ManajemenUser extends Component
             'name' => $this->name,
             'nip' => $this->nip,
             'password' => bcrypt($this->password),
-            'role_id' => $this->role_id,
+            'role' => $this->role,
             'jabatan' => $this->jabatan,
             'nomor_wa' => $this->nomor_wa,
         ];
@@ -75,7 +79,7 @@ class ManajemenUser extends Component
         if ($user) {
             $this->name = $user->name;
             $this->nip = $user->nip;
-            $this->role_id = $user->role_id;
+            $this->role = $user->role;
             $this->jabatan = $user->jabatan;
             $this->nomor_wa = $user->nomor_wa;
             $this->mode = 'edit';
@@ -87,7 +91,7 @@ class ManajemenUser extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'nip' => 'required|string|max:20|unique:users,nip,' . $this->editId,
-            'role_id' => 'required|integer',
+            'role' => 'required',
             'jabatan' => 'required|integer|max:100',
             'nomor_wa' => 'required|string|max:15',
         ]);
@@ -95,7 +99,7 @@ class ManajemenUser extends Component
         $data = [
             'name' => $this->name,
             'nip' => $this->nip,
-            'role_id' => $this->role_id,
+            'role' => $this->role,
             'jabatan' => $this->jabatan,
             'nomor_wa' => $this->nomor_wa,
         ];

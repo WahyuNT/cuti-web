@@ -16,6 +16,13 @@ class PermohonanIzin extends Component
     public $bulan;
     public $status;
     public $filter;
+
+    public function mount()
+    {
+        $this->status = request()->query('status');
+    }
+
+
     public function render()
     {
         $tahunData = Tahun::where('status', 'active')

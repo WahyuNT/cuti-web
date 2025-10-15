@@ -400,9 +400,7 @@
                         <div class="w-full lg:w-1/2 px-2 mb-3">
                             <x-select label="Tahun" for="tahunFilter" wire="tahunFilter" wireType="change"
                                 placeholder="Semua Tahun" :options="$tahunData" />
-                            @error('tahun')
-                                <div class="text-red-600 text-sm">{{ $message }}</div>
-                            @enderror
+        
                         </div>
 
                         <div class="w-full lg:w-1/2 px-2 mb-3">
