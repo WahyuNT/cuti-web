@@ -30,7 +30,9 @@ class ManajemenTanggalMerah extends Component
             $query->where(function ($subquery) {
                 $subquery->where('keterangan', 'like', '%' . $this->filter . '%');
             });
-        })->paginate(10);
+        })
+        ->orderBy('id', 'desc')
+        ->paginate(10);
 
 
         return view('livewire.manajemen-tanggal-merah', compact('data'))->extends('layouts.master');

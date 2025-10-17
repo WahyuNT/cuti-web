@@ -32,7 +32,9 @@ class ManajemenCuti extends Component
                 $subquery->where('name', 'like', '%' . $this->filter . '%')
                     ->orWhere('deskripsi', 'like', '%' . $this->filter . '%');
             });
-        })->paginate(10);
+        })
+            ->orderBy('id', 'desc')
+            ->paginate(10);
 
 
         return view('livewire.manajemen-cuti', compact('data'))->extends('layouts.master');
@@ -44,7 +46,7 @@ class ManajemenCuti extends Component
     public function resetInput()
     {
         $this->mode = 'view';
-         $this->editId = null;
+        $this->editId = null;
         $this->resetValidation();
         $this->reset(['name', 'status', 'deskripsi', 'is_count']);
     }

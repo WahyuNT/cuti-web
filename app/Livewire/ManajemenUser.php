@@ -31,7 +31,9 @@ class ManajemenUser extends Component
                     ->orWhere('jabatan', 'like', '%' . $this->filter . '%')
                     ->orWhere('nomor_wa', 'like', '%' . $this->filter . '%');
             });
-        })->paginate(10);
+        })
+        ->orderBy('id', 'desc')
+        ->paginate(10);
 
         $jabatanData = Jabatan::where('status', 'active')
             ->pluck('name', 'id')

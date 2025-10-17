@@ -29,7 +29,9 @@ class ManajemenTahun extends Component
             $query->where(function ($subquery) {
                 $subquery->where('tahun', 'like', '%' . $this->filter . '%');
             });
-        })->paginate(10);
+        })
+        ->orderBy('id', 'desc')
+        ->paginate(10);
 
 
         return view('livewire.manajemen-tahun', compact('data'))->extends('layouts.master');
