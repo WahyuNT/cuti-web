@@ -30,6 +30,14 @@
                        <span class="sr-only">Open user menu</span>
                        <img class="w-8 h-8 rounded-full hover:cursor-pointer"
                            src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                       <form action="{{ route('logout') }}" method="POST">
+                           @csrf
+                           <li>
+                               <button
+                                   class="block py-2 px-4 w-full text-sm hover:bg-gray-100 hover:cursor-pointer">Sign
+                                   out</butt>
+                           </li>
+                       </form>
                    </button>
 
                    <!-- User dropdown -->

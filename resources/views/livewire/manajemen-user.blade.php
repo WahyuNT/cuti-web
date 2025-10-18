@@ -41,13 +41,12 @@
                         <tbody>
                             @forelse ($data as $item)
                                 <tr class="odd:bg-white even:bg-gray-50">
-                                    <td class="px-6 py-4">{{ $item->name }}</td>
-                                    <td class="px-6 py-4">{{ $item->nip }}</td>
-                                    <td class="px-6 py-4">{{ $item->role }}</td>
-                                    <td class="px-6 py-4">{{ $item->jabatan->name }}</td>
-                                    <td class="px-6 py-4">{{ $item->nomor_wa }}</td>
+                                    <td class="px-6 py-4">{{ $item->name ?? '-' }}</td>
+                                    <td class="px-6 py-4">{{ $item->nip ?? '-' }}</td>
+                                    <td class="px-6 py-4">{{ $item->role ?? '-' }}</td>
+                                    <td class="px-6 py-4">{{ $item->jabatan->name ?? '-' }}</td>
+                                    <td class="px-6 py-4">{{ $item->nomor_wa ?? '-' }}</td>
                                     <td class="text-center justify-center">
-
                                         <a href="{{ route('manajemen-cuti-user', ['id' => $item->id]) }}">
                                             <button type="button"
                                                 class="text-white bg-[var(--info)] hover:brightness-90 font-medium rounded-lg text-sm w-full sm:w-auto px-1.5 py-1.5 text-center hover:cursor-pointer hover:scale-102 transition-transform duration-200">
@@ -124,8 +123,8 @@
                 </div>
 
                 <div>
-                    <x-select label="Semua Jabatan" for="jabatan" wire="jabatan" wireType="change"
-                        placeholder="Semua Tahun" :options="$jabatanData" :required="true" />
+                    <x-select label="Semua Jabatan" for="jabatan_id" wire="jabatan_id" wireType="change"
+                        placeholder="Semua Jabatan" :options="$jabatanData" :required="true" />
                 </div>
 
                 <div>

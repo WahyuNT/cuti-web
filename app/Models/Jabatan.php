@@ -15,4 +15,9 @@ class Jabatan extends Model
     {
         return $this->hasMany(User::class, 'jabatan_id');
     }
+
+    public function approval_level()
+    {
+        return $this->hasMany(ApprovalLevel::class, 'jabatan_id');
+    }
 }

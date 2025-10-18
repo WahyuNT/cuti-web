@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('approval_level', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('jabatan_id')->constrained('jabatan')->onDelete('cascade');
             $table->integer('level');
             $table->timestamps();
         });

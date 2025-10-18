@@ -71,9 +71,11 @@
                                         bg-[var(--warning)] @endif">{{ ucfirst($item->status) }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-900"><button
-                                class="bg-[var(--primary)] text-white px-1 py-1 rounded-md hover:cursor-pointer hover:scale-105"><i
-                                    class="fa-solid fa-print"></i></button>
+                        <td class="px-6 py-4 text-sm text-gray-900 gap-2">
+                            <x-button wire:click="reject({{ $item->id }})" bg="[var(--danger)]" px="1.5"
+                                py="1.5" label='<i class="fa-solid fa-circle-xmark"></i>' />
+                            <x-button wire:click="approve({{ $item->id }})" bg="[var(--success)]" px="1.5"
+                                py="1.5" label='<i class="fa-solid fa-circle-check"></i>' />
                         </td>
                     </tr>
                 @empty

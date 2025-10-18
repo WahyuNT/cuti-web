@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Cuti;
+use App\Models\CutiApprovalWorkflow;
 use App\Models\CutiType;
 use App\Models\Tahun;
 use Livewire\Component;
@@ -18,12 +19,12 @@ class PermohonanCuti extends Component
     public $status;
     public $filter;
 
-        public function mount()
+    public function mount()
     {
         $this->status = request()->query('status');
     }
 
-    
+
     public function render()
     {
         $tahunData = Tahun::where('status', 'active')
@@ -33,7 +34,13 @@ class PermohonanCuti extends Component
             ->pluck('name', 'id')
             ->toArray();
 
-        $data = Cuti::where('user_id', JWTAuth::parseToken()->authenticate()->id)
+        $user = JWTAuth::parseToken()->authenticate();
+
+        $approvalList = CutiApprovalWorkflow::wherehas('approvalLevel', function ($query) use ($user) {
+            $query->where('jabatan_id', $user->jabatan_id);
+        })->where('status', 'waiting')->pluck('cuti_id')->toArray();
+
+        $data = Cuti::wherein('id', $approvalList)
             ->when($this->tahun, function ($query) {
                 return $query->whereYear('created_at', $this->tahun);
             })
@@ -76,5 +83,38 @@ class PermohonanCuti extends Component
     public function updatedStatus()
     {
         $this->resetPage();
+    }
+
+    public function approve($id)
+    {
+        $user = JWTAuth::parseToken()->authenticate();
+
+        $cutiApprovalWorkflow = CutiApprovalWorkflow::where('cuti_id', $id)->get();
+
+        $currentIndex = $cutiApprovalWorkflow->search(function ($item) use ($user) {
+            return $item->approval_level_id == $user->jabatan_id && $item->status == 'waiting';
+        });
+
+        if ($currentIndex !== false) {
+            $dataCurrent = $cutiApprovalWorkflow[$currentIndex];
+            $dataCurrent->status = 'success';
+            $dataCurrent->save();
+
+            if (isset($cutiApprovalWorkflow[$currentIndex + 1])) {
+                $dataNextIndex = $cutiApprovalWorkflow[$currentIndex + 1];
+                $dataNextIndex->status = 'waiting';
+                $dataNextIndex->save();
+            }
+        }
+    }
+
+    public function reject($id)
+    {
+        $cuti = Cuti::find($id);
+        $cuti->status = 'rejected';
+        $cuti->save();
+
+        $cutiApprovalWorkflow =CutiApprovalWorkflow::where('cuti_id', $id)
+        ->get();
     }
 }

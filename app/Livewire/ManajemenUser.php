@@ -19,7 +19,7 @@ class ManajemenUser extends Component
     public $editId = null;
     public $deleteId = null;
     public $filter = null;
-    public $name, $nip, $password, $role, $jabatan, $nomor_wa;
+    public $name, $nip, $password, $role, $jabatan_id, $nomor_wa;
 
 
     public function render()
@@ -28,12 +28,14 @@ class ManajemenUser extends Component
             $query->where(function ($subquery) {
                 $subquery->where('name', 'like', '%' . $this->filter . '%')
                     ->orWhere('nip', 'like', '%' . $this->filter . '%')
-                    ->orWhere('jabatan', 'like', '%' . $this->filter . '%')
-                    ->orWhere('nomor_wa', 'like', '%' . $this->filter . '%');
+                    ->orWhere('nomor_wa', 'like', '%' . $this->filter . '%')
+                    ->orwherehas('jabatan', function ($jabatan) {
+                        $jabatan->where('name', 'like', '%' . $this->filter . '%');
+                    });
             });
         })
-        ->orderBy('id', 'desc')
-        ->paginate(10);
+            ->orderBy('id', 'desc')
+            ->paginate(10);
 
         $jabatanData = Jabatan::where('status', 'active')
             ->pluck('name', 'id')
@@ -49,16 +51,16 @@ class ManajemenUser extends Component
         $this->mode = 'view';
         $this->resetValidation();
         $this->editId = null;
-        $this->reset(['name', 'nip', 'password', 'role', 'jabatan', 'nomor_wa']);
+        $this->reset(['name', 'nip', 'password', 'role', 'jabatan_id', 'nomor_wa']);
     }
     public function create(CrudService $crud)
     {
         $this->validate([
             'name' => 'required|string|max:255',
             'nip' => 'required|string|max:20|unique:users,nip',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:1',
             'role' => 'required',
-            'jabatan' => 'required|integer',
+            'jabatan_id' => 'required|integer',
             'nomor_wa' => 'required|string|max:15',
         ]);
 
@@ -67,7 +69,7 @@ class ManajemenUser extends Component
             'nip' => $this->nip,
             'password' => bcrypt($this->password),
             'role' => $this->role,
-            'jabatan' => $this->jabatan,
+            'jabatan_id' => $this->jabatan_id,
             'nomor_wa' => $this->nomor_wa,
         ];
 
@@ -82,7 +84,7 @@ class ManajemenUser extends Component
             $this->name = $user->name;
             $this->nip = $user->nip;
             $this->role = $user->role;
-            $this->jabatan = $user->jabatan;
+            $this->jabatan_id = $user->jabatan_id;
             $this->nomor_wa = $user->nomor_wa;
             $this->mode = 'edit';
             $this->editId = $id;
@@ -94,7 +96,7 @@ class ManajemenUser extends Component
             'name' => 'required|string|max:255',
             'nip' => 'required|string|max:20|unique:users,nip,' . $this->editId,
             'role' => 'required',
-            'jabatan' => 'required|integer|max:100',
+            'jabatan_id' => 'required|integer|max:100',
             'nomor_wa' => 'required|string|max:15',
         ]);
 
@@ -102,9 +104,13 @@ class ManajemenUser extends Component
             'name' => $this->name,
             'nip' => $this->nip,
             'role' => $this->role,
-            'jabatan' => $this->jabatan,
+            'jabatan_id' => $this->jabatan_id,
             'nomor_wa' => $this->nomor_wa,
+
         ];
+        if (!empty($this->password)) {
+            $data['password'] = bcrypt($this->password);
+        }
 
         $crud->update(User::class, $this->editId, $data, 'User berhasil diperbarui!', 'Gagal memperbarui user.');
         $this->resetInput();
