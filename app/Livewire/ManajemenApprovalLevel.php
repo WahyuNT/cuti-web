@@ -3,8 +3,10 @@
 namespace App\Livewire;
 
 use App\Models\ApprovalLevel;
+use App\Models\Cuti;
 use App\Models\Jabatan;
 use App\Services\CrudService;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Component;
 
 class ManajemenApprovalLevel extends Component
@@ -14,9 +16,6 @@ class ManajemenApprovalLevel extends Component
     public $deleteId = null;
     public $jabatan_id;
 
-    protected $rules = [
-        'jabatan_id' => 'required|integer',
-    ];
 
     public function render()
     {
@@ -44,17 +43,29 @@ class ManajemenApprovalLevel extends Component
     }
     public function create(CrudService $crud)
     {
-        $this->validate();
+
+        $this->validate([
+            'jabatan_id' => 'required|integer|unique:approval_level,jabatan_id',
+        ]);
 
         $data = [
             'jabatan_id' => $this->jabatan_id,
         ];
 
-        $crud->create(ApprovalLevel::class, $data, 'Tahapan Cuti berhasil dibuat!', 'Gagal membuat Tahapan Cuti.');
-        $this->resetInput();
+        if ($this->getCutiStatusPending() == 0) {
+            $crud->create(ApprovalLevel::class, $data, 'Tahapan Cuti berhasil dibuat!', 'Gagal membuat Tahapan Cuti.');
+            $this->resetInput();
+        } else {
+            LivewireAlert::title('Terdapat pengajuan cuti yang masih berstatus pending. Mohon untuk menyelesaikan pengajuan cuti sebelumnya terlebih dahulu.')
+                ->position('top-end')
+                ->toast()
+                ->error()
+                ->show();
+        }
     }
     public function edit($id, CrudService $crud)
     {
+
         $data = $crud->find(ApprovalLevel::class, $id);
 
         if ($data) {
@@ -66,17 +77,33 @@ class ManajemenApprovalLevel extends Component
     public function update(CrudService $crud)
     {
 
-        $this->validate();
+        $this->validate([
+            'jabatan_id' => 'required|integer|unique:approval_level,jabatan_id,' . $this->editId,
+        ]);
         $data = [
             'jabatan_id' => $this->jabatan_id,
         ];
-        $crud->update(ApprovalLevel::class, $this->editId, $data, 'Tahapan Cuti berhasil diperbarui!', 'Gagal memperbarui Tahapan Cuti .');
-        $this->resetInput();
+
+
+        if ($this->getCutiStatusPending() == 0) {
+            $crud->update(ApprovalLevel::class, $this->editId, $data, 'Tahapan Cuti berhasil diperbarui!', 'Gagal memperbarui Tahapan Cuti .');
+            $this->resetInput();
+        } else {
+            LivewireAlert::title('Terdapat pengajuan cuti yang masih berstatus pending. Mohon untuk menyelesaikan pengajuan cuti sebelumnya terlebih dahulu.')
+                ->position('top-end')
+                ->toast()
+                ->error()
+                ->show();
+        }
     }
 
     public function delete($id, CrudService $crud)
     {
         $crud->delete(ApprovalLevel::class, $id, 'Tahapan Cuti berhasil dihapus!', 'Gagal menghapus Tahapan Cuti.');
         $this->resetInput();
+    }
+    public function getCutiStatusPending()
+    {
+        return Cuti::where('status', 'pending')->count();
     }
 }
