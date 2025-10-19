@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\ApprovalLevel;
 use App\Models\Cuti;
 use App\Models\CutiApprovalLevel;
 use App\Models\CutiApprovalWorkflow;
@@ -53,7 +52,7 @@ class PengajuanCuti extends Component
 
             $cuti = Cuti::create($data);
 
-            $approvalLevel = ApprovalLevel::all();
+            $approvalLevel = CutiApprovalLevel::all();
 
             foreach ($approvalLevel as $workflow) {
                 CutiApprovalWorkflow::create([
@@ -77,4 +76,5 @@ class PengajuanCuti extends Component
     {
         $this->reset(['cuti_type_id', 'alasan', 'tanggal']);
     }
+    
 }

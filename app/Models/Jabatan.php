@@ -18,6 +18,6 @@ class Jabatan extends Model
 
     public function approval_level()
     {
-        return $this->hasMany(ApprovalLevel::class, 'jabatan_id');
+        return $this->hasMany(CutiApprovalLevel::class, 'jabatan_id');
     }
 }

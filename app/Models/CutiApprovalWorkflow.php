@@ -13,7 +13,7 @@ class CutiApprovalWorkflow extends Model
 
     public function approvalLevel()
     {
-        return $this->belongsTo(ApprovalLevel::class, 'approval_level_id');
+        return $this->belongsTo(CutiApprovalLevel::class, 'approval_level_id');
     }
     public function cuti()
     {

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Cuti;
+use App\Models\CutiApprovalWorkflow;
 use App\Models\CutiType;
 use App\Models\Tahun;
 use Livewire\Component;
@@ -17,6 +18,8 @@ class RiwayatCuti extends Component
     public $bulan;
     public $status;
     public $filter;
+    public $viewFlowId;
+    public $flowData;
 
     public function mount()
     {
@@ -51,6 +54,15 @@ class RiwayatCuti extends Component
             ->paginate(10);
 
         return view('livewire.riwayat-cuti', compact('data', 'tahunData', 'cutiTypesData'))->extends('layouts.master');
+    }
+    public function viewFlow($id)
+    {
+        $flowData = CutiApprovalWorkflow::with('approvalLevel')
+            ->where('cuti_id', $id)
+            ->orderBy('id')
+            ->get();
+            
+        $this->flowData = $flowData;
     }
     public function updatedFilter()
     {

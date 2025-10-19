@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('approval_level', function (Blueprint $table) {
+        Schema::create('cuti_approval_level_ref', function (Blueprint $table) {
             $table->id();
             $table->foreignId('jabatan_id')->constrained('jabatan')->onDelete('cascade');
             $table->integer('level');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('approval_level');
+        Schema::dropIfExists('cuti_approval_level_ref');
     }
 };

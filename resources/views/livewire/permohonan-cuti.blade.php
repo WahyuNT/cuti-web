@@ -116,7 +116,7 @@
                         Tahapan Approval Cuti
                     </h3>
                     <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
+                        class="text-gray-400 hover:cursor-pointer bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
                         data-modal-hide="default-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
@@ -140,7 +140,7 @@
                                                 <div class="absolute flex items-center"
                                                     style="width: calc(100% - 2.5rem - 1rem); top: 50%; transform: translate(-50%, -50%)">
                                                     <div class="w-full bg-gray-200 rounded">
-                                                        <div class="w-0 bg-green-300 py-1 rounded"
+                                                        <div class="w-0 bg-green-500 py-1 rounded"
                                                             style="width: {{ $item->progress ?? '100%' }};"></div>
                                                     </div>
                                                 </div>
@@ -149,15 +149,15 @@
                                             {{-- Icon step --}}
                                             <div
                                                 class="w-10 h-10 mx-auto rounded-full flex items-center justify-center text-white
-    @if ($item->status == 'success') bg-[var(--success)]
-    @elseif ($item->status == 'waiting')
-        bg-[var(--warning)]
-    @elseif ($item->status == 'failed')
-        bg-[var(--danger)]
-    @elseif ($item->status == 'pending')
-        bg-gray-500
-    @else
-        bg-gray-300 @endif">
+                                                @if ($item->status == 'success') bg-[var(--success)]
+                                                @elseif ($item->status == 'waiting')
+                                                    bg-[var(--warning)]
+                                                @elseif ($item->status == 'failed')
+                                                    bg-[var(--danger)]
+                                                @elseif ($item->status == 'pending')
+                                                    bg-gray-500
+                                                @else
+                                                    bg-gray-300 @endif">
                                                 <span class="w-full text-center">
                                                     @if ($item->status == 'success')
                                                         <i class="fa-solid fa-circle-check"></i>
@@ -173,18 +173,25 @@
                                         </div>
 
                                         {{-- Label di bawah icon --}}
-                                        <div class="text-xs text-center  md:text-base">
-                                            <div class="flex items-center justify-center">
-
-                                                {{ $item->approvalLevel->jabatan->name ?? 'Unknown' }}
-                                                @if ($item->approvalLevel->jabatan->id == $user->jabatan_id)
-                                                    <span
-                                                        class="px-1 py-0.5 ms-1 text-[10px] leading-none rounded-full text-white font-medium bg-[var(--warning)]">
-                                                        Anda
-                                                    </span>
-                                                @endif
+                                        <div class="text-xs text-center md:text-base">
+                                            <div class="flex flex-col items-center justify-center">
+                                                <div>
+                                                    {{ $item->approvalLevel->jabatan->name ?? 'Unknown' }}
+                                                    @if ($item->approvalLevel->jabatan->id == $user->jabatan_id)
+                                                        <span
+                                                            class="px-1 py-0.5 ms-1 text-[10px] leading-none rounded-full text-white font-medium bg-[var(--warning)]">
+                                                            Anda
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                <div class="text-gray-500 text-[10px] md:text-xs mt-0">
+                                                        @if ($item->updated_at && $item->updated_at != $item->created_at)
+                                                        {{ $item->updated_at->locale('id')->translatedFormat('d M Y H:i') }}
+                                                        @else
+                                                        -
+                                                        @endif
+                                                    </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 @empty

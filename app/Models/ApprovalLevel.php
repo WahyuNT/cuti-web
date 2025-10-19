@@ -9,7 +9,7 @@ class ApprovalLevel extends Model
 {
     use HasFactory;
 
-    protected $table = 'approval_level';
+    protected $table = 'cuti_approval_level_ref';
     protected $fillable = ['jabatan_id'];
 
     public function jabatan()

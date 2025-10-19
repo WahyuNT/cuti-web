@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\ApprovalLevel;
+use App\Models\CutiApprovalLevel;
 use App\Models\Cuti;
 use App\Models\Jabatan;
 use App\Services\CrudService;
@@ -19,8 +19,10 @@ class ManajemenApprovalLevel extends Component
 
     public function render()
     {
-        $data = ApprovalLevel::orderBy('id', 'asc')
+        $data = CutiApprovalLevel::orderBy('id', 'asc')
             ->get();
+
+
 
         $jabatanTypes = Jabatan::where('status', 'active')
             ->pluck('name', 'id')
@@ -53,7 +55,7 @@ class ManajemenApprovalLevel extends Component
         ];
 
         if ($this->getCutiStatusPending() == 0) {
-            $crud->create(ApprovalLevel::class, $data, 'Tahapan Cuti berhasil dibuat!', 'Gagal membuat Tahapan Cuti.');
+            $crud->create(CutiApprovalLevel::class, $data, 'Tahapan Cuti berhasil dibuat!', 'Gagal membuat Tahapan Cuti.');
             $this->resetInput();
         } else {
             LivewireAlert::title('Terdapat pengajuan cuti yang masih berstatus pending. Mohon untuk menyelesaikan pengajuan cuti sebelumnya terlebih dahulu.')
@@ -66,7 +68,7 @@ class ManajemenApprovalLevel extends Component
     public function edit($id, CrudService $crud)
     {
 
-        $data = $crud->find(ApprovalLevel::class, $id);
+        $data = $crud->find(CutiApprovalLevel::class, $id);
 
         if ($data) {
             $this->jabatan_id = $data->jabatan_id;
@@ -86,7 +88,7 @@ class ManajemenApprovalLevel extends Component
 
 
         if ($this->getCutiStatusPending() == 0) {
-            $crud->update(ApprovalLevel::class, $this->editId, $data, 'Tahapan Cuti berhasil diperbarui!', 'Gagal memperbarui Tahapan Cuti .');
+            $crud->update(CutiApprovalLevel::class, $this->editId, $data, 'Tahapan Cuti berhasil diperbarui!', 'Gagal memperbarui Tahapan Cuti .');
             $this->resetInput();
         } else {
             LivewireAlert::title('Terdapat pengajuan cuti yang masih berstatus pending. Mohon untuk menyelesaikan pengajuan cuti sebelumnya terlebih dahulu.')
@@ -99,7 +101,7 @@ class ManajemenApprovalLevel extends Component
 
     public function delete($id, CrudService $crud)
     {
-        $crud->delete(ApprovalLevel::class, $id, 'Tahapan Cuti berhasil dihapus!', 'Gagal menghapus Tahapan Cuti.');
+        $crud->delete(CutiApprovalLevel::class, $id, 'Tahapan Cuti berhasil dihapus!', 'Gagal menghapus Tahapan Cuti.');
         $this->resetInput();
     }
     public function getCutiStatusPending()
