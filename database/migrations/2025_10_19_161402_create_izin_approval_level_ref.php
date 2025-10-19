@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cuti_approval_level_ref', function (Blueprint $table) {
+        Schema::create('izin_approval_level_ref', function (Blueprint $table) {
             $table->id();
             $table->foreignId('jabatan_id')->constrained('jabatan')->onDelete('cascade');
             $table->timestamps();
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cuti_approval_level_ref');
+        Schema::dropIfExists('izin_approval_level_ref');
     }
 };

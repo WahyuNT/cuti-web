@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CutiApprovalLevel extends Model
 {
   use HasFactory;
-
   protected $table = 'cuti_approval_level_ref';
   protected $fillable = ['jabatan_id'];
 

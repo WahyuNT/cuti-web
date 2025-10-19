@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cuti_approval_workflow', function (Blueprint $table) {
+        Schema::create('izin_approval_workflow', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cuti_id')->constrained('cuti')->onDelete('cascade');
-            $table->foreignId('approval_level_id')->constrained('cuti_approval_level_ref')->onDelete('cascade');
+            $table->foreignId('izin_id')->constrained('izin')->onDelete('cascade');
+            $table->foreignId('approval_level_id')->constrained('izin_approval_level_ref')->onDelete('cascade');
             $table->enum('status', ['pending', 'success', 'failed', 'waiting'])->default('pending');
             $table->timestamps();
         });
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cuti_approval_workflow');
+        Schema::dropIfExists('izin_approval_workflow');
     }
 };

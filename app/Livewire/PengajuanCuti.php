@@ -54,11 +54,11 @@ class PengajuanCuti extends Component
 
             $approvalLevel = CutiApprovalLevel::all();
 
-            foreach ($approvalLevel as $workflow) {
+            foreach ($approvalLevel as $index => $workflow) {
                 CutiApprovalWorkflow::create([
                     'cuti_id' => $cuti->id,
                     'approval_level_id' => $workflow->id,
-                    'status' => 'pending',
+                    'status' => $index === 0 ? 'waiting' : 'pending',
                 ]);
             }
 
@@ -67,14 +67,12 @@ class PengajuanCuti extends Component
                 ->toast()
                 ->success()
                 ->show();
+
+            $this->resetInput();
         });
-
-
-        $this->resetInput();
     }
     public function resetInput()
     {
         $this->reset(['cuti_type_id', 'alasan', 'tanggal']);
     }
-    
 }

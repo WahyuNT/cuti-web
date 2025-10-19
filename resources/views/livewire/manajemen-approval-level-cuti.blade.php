@@ -71,7 +71,7 @@
                                         :required="true" />
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <x-button wire:click="resetInput({{ $item->id }})" bg="[var(--danger)]"
+                                    <x-button wire:click="resetInput" bg="[var(--danger)]"
                                         px="1" py="1" label='<i class="fa-solid fa-sm fa-x"></i>' />
                                     <x-button wire:click="update({{ $item->id }})" bg="[var(--success)]"
                                         px="1" py="1" label='<i class="fa-solid fa-sm fa-check"></i>' />

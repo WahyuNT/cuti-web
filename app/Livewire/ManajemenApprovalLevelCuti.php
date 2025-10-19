@@ -9,7 +9,7 @@ use App\Services\CrudService;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Component;
 
-class ManajemenApprovalLevel extends Component
+class ManajemenApprovalLevelCuti extends Component
 {
     public $mode = 'view';
     public $editId = null;
@@ -28,7 +28,7 @@ class ManajemenApprovalLevel extends Component
             ->pluck('name', 'id')
             ->toArray();
 
-        return view('livewire.manajemen-approval-level', compact('data', 'jabatanTypes'));
+        return view('livewire.manajemen-approval-level-cuti', compact('data', 'jabatanTypes'));
     }
 
 
@@ -47,7 +47,7 @@ class ManajemenApprovalLevel extends Component
     {
 
         $this->validate([
-            'jabatan_id' => 'required|integer|unique:approval_level,jabatan_id',
+            'jabatan_id' => 'required|integer|unique:izin_approval_level_ref,jabatan_id',
         ]);
 
         $data = [

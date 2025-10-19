@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ApprovalLevel extends Model
+class IzinApprovalLevel extends Model
 {
     use HasFactory;
-
-    protected $table = 'cuti_approval_level_ref';
+    protected $table = 'izin_approval_level_ref';
     protected $fillable = ['jabatan_id'];
 
     public function jabatan()
@@ -17,8 +16,8 @@ class ApprovalLevel extends Model
         return $this->belongsTo(Jabatan::class, 'jabatan_id');
     }
 
-    public function cutiApprovals()
+    public function izinApprovals()
     {
-        return $this->hasMany(CutiApprovalWorkflow::class, 'approval_level_id');
+        return $this->hasMany(IzinApprovalWorkflow::class, 'approval_level_id');
     }
 }
