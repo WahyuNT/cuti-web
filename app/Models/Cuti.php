@@ -28,4 +28,9 @@ class Cuti extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function cutiApprovalWorkflows()
+    {
+        return $this->hasMany(CutiApprovalWorkflow::class);
+    }
 }

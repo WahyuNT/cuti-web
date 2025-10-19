@@ -6,6 +6,7 @@
 <script src="{{ asset('libs/apexcharts/dist/apexcharts.min.js') }}"></script>
 <script src="{{ asset('libs/simplebar/dist/simplebar.js') }}"></script>
 <script src="{{ asset('js/dashboard.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
