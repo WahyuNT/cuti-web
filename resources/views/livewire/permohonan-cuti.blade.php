@@ -40,11 +40,13 @@
                         Tanggal</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Alasan</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Status</th>
                     <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Proses</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {{-- <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Preview</th> --}}
+                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Aksi</th>
                 </tr>
             </thead>
@@ -63,7 +65,7 @@
                             @endforeach
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $item->cuti->alasan }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">
+                        <td class="px-6 py-4 text-sm text-gray-900 flex justify-center">
                             <span
                                 class="px-3 py-1 rounded-full text-white text-xs font-semibold
                                     @if ($item->status === 'success') bg-[var(--success)]
@@ -73,13 +75,19 @@
                                         bg-[var(--warning)] @endif">{{ ucfirst($item->status) }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-900 text-center">
+                        <td class="px-6 py-4 text-sm text-gray-900  text-center  ">
                             <button wire:click="viewFlow({{ $item->cuti->id }})" type="button"
                                 data-modal-target="default-modal" data-modal-toggle="default-modal"
-                                class="text-white bg-[var(--info)] hover:brightness-90 hover:cursor-pointer font-medium rounded-lg text-sm px-1.5 py-1.5 me-2 mb-2"><i
+                                class="text-white bg-[var(--info)] hover:brightness-90 hover:cursor-pointer font-medium rounded-lg text-sm px-1.5 py-1.5 me-2 "><i
                                     class="fa-solid fa-sitemap"></i></button>
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-900 gap-2">
+                        <td class="px-6 py-4 text-sm text-gray-900  gap-2 flex justify-center">
+                            <a href="{{ route('preview-cuti', $item->cuti->id) }}">
+                                <x-button bg="[var(--primary)]" px="2" py="1.5"
+                                    label='<i class="fa-solid fa-eye"></i> Detail' />
+                            </a>
+                        </td>
+                        {{-- <td class="px-6 py-4 text-sm text-gray-900 gap-2">
                             @if ($item->status === 'waiting')
                                 <x-button wire:click="reject({{ $item->cuti->id }})" bg="[var(--danger)]" px="1.5"
                                     py="1.5" label='<i class="fa-solid fa-circle-xmark"></i>' />
@@ -89,7 +97,7 @@
                                 <x-button wire:click="backToWaiting({{ $item->cuti->id }})" bg="[var(--warning)]"
                                     px="1.5" py="1.5" label='<i class="fa-solid fa-clock"></i>' />
                             @endif
-                        </td>
+                        </td> --}}
                     </tr>
                 @empty
                     <tr>
@@ -185,12 +193,12 @@
                                                     @endif
                                                 </div>
                                                 <div class="text-gray-500 text-[10px] md:text-xs mt-0">
-                                                        @if ($item->updated_at && $item->updated_at != $item->created_at)
+                                                    @if ($item->updated_at && $item->updated_at != $item->created_at)
                                                         {{ $item->updated_at->locale('id')->translatedFormat('d M Y H:i') }}
-                                                        @else
+                                                    @else
                                                         -
-                                                        @endif
-                                                    </div>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
