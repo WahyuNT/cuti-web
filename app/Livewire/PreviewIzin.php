@@ -2,14 +2,14 @@
 
 namespace App\Livewire;
 
-use App\Models\Cuti;
-use App\Models\CutiApprovalWorkflow;
+use App\Models\Izin;
+use App\Models\IzinApprovalWorkflow;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Component;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class PreviewCuti extends Component
+class PreviewIzin extends Component
 {
 
     public $id;
@@ -21,75 +21,73 @@ class PreviewCuti extends Component
         $this->id = $id;
         $this->user = JWTAuth::parseToken()->authenticate();
 
-        $cutiFlowNow = CutiApprovalWorkflow::where('cuti_id', $this->id)
+        $izinFlowNow = IzinApprovalWorkflow::where('izin_id', $this->id)
             ->whereHas('approvalLevel', function ($query) {
                 $query->where('jabatan_id', $this->user->jabatan_id);
             })
             ->first();
 
-        if (!$cutiFlowNow) {
-            return redirect()->route('permohonan-cuti');
+        if (!$izinFlowNow) {
+            return redirect()->route('permohonan-izin');
         }
     }
 
 
     public function render()
     {
-        $cutiFlow = CutiApprovalWorkflow::where('cuti_id', $this->id)->get();
+        $izinFlow = IzinApprovalWorkflow::where('izin_id', $this->id)->get();
 
-        $cutiFlowNow = CutiApprovalWorkflow::where('cuti_id', $this->id)
+        $izinFlowNow = IzinApprovalWorkflow::where('izin_id', $this->id)
             ->whereHas('approvalLevel', function ($query) {
                 $query->where('jabatan_id', $this->user->jabatan_id);
             })
             ->first();
 
 
-        return view('livewire.preview-cuti',  compact('cutiFlow', 'cutiFlowNow'))->extends('layouts.master');
+        return view('livewire.preview-izin',  compact('izinFlow', 'izinFlowNow'))->extends('layouts.master');
     }
-    public function redirectOut() {}
     public function approve($id)
     {
         $user = $this->user;
 
         // eager load approvalLevel & pastikan urutan
-        $cutiApprovalWorkflow = CutiApprovalWorkflow::with('approvalLevel')
-            ->where('cuti_id', $id)
+        $izinApprovalWorkflow = IzinApprovalWorkflow::with('approvalLevel')
+            ->where('izin_id', $id)
             ->orderBy('id')
             ->get();
 
         // cari index yang sesuai jabatan user dan status waiting
-        $currentIndex = $cutiApprovalWorkflow->search(function ($item) use ($user) {
+        $currentIndex = $izinApprovalWorkflow->search(function ($item) use ($user) {
             return $item->approvalLevel->jabatan_id == $user->jabatan_id && $item->status == 'waiting';
         });
 
         if ($currentIndex !== false) {
-            DB::transaction(function () use ($cutiApprovalWorkflow, $currentIndex, $id) {
-                $dataCurrent = $cutiApprovalWorkflow[$currentIndex];
+            DB::transaction(function () use ($izinApprovalWorkflow, $currentIndex, $id) {
+                $dataCurrent = $izinApprovalWorkflow[$currentIndex];
                 $dataCurrent->status = 'success';
                 $dataCurrent->save();
 
                 // aktifkan next approver kalau ada
-                if (isset($cutiApprovalWorkflow[$currentIndex + 1])) {
-                    $dataNextIndex = $cutiApprovalWorkflow[$currentIndex + 1];
+                if (isset($izinApprovalWorkflow[$currentIndex + 1])) {
+                    $dataNextIndex = $izinApprovalWorkflow[$currentIndex + 1];
                     $dataNextIndex->status = 'waiting';
                     $dataNextIndex->save();
                 }
 
                 // cek apakah ini index terakhir
-                $lastIndex = $cutiApprovalWorkflow->count() - 1;
+                $lastIndex = $izinApprovalWorkflow->count() - 1;
                 if ($currentIndex === $lastIndex) {
-                    $cuti = Cuti::find($id);
-                    $cuti->status = 'success';
-                    $cuti->save();
+                    $izin = Izin::find($id);
+                    $izin->status = 'success';
+                    $izin->save();
                 }
             });
 
-            LivewireAlert::title('Approval Cuti Berhasil!')
+            LivewireAlert::title('Approval Izin Berhasil!')
                 ->position('top-end')
                 ->toast()
                 ->success()
                 ->show();
-            $this->render();
         } else {
             LivewireAlert::title('Tidak ada approval yang menunggu untuk jabatan ini')
                 ->position('top-end')
@@ -104,34 +102,33 @@ class PreviewCuti extends Component
         $user = $this->user;
 
         // eager load approvalLevel & pastikan urutan
-        $cutiApprovalWorkflow = CutiApprovalWorkflow::with('approvalLevel')
-            ->where('cuti_id', $id)
+        $izinApprovalWorkflow = IzinApprovalWorkflow::with('approvalLevel')
+            ->where('izin_id', $id)
             ->orderBy('id')
             ->get();
 
         // cari index yang sesuai jabatan user dan status waiting
-        $currentIndex = $cutiApprovalWorkflow->search(function ($item) use ($user) {
+        $currentIndex = $izinApprovalWorkflow->search(function ($item) use ($user) {
             return $item->approvalLevel->jabatan_id == $user->jabatan_id && $item->status == 'waiting';
         });
 
         if ($currentIndex !== false) {
-            //ubah status di CutiApprovalWorkflow
-            DB::transaction(function () use ($cutiApprovalWorkflow, $currentIndex, $id) {
-                $dataCurrent = $cutiApprovalWorkflow[$currentIndex];
+            //ubah status di IzinApprovalWorkflow
+            DB::transaction(function () use ($izinApprovalWorkflow, $currentIndex, $id) {
+                $dataCurrent = $izinApprovalWorkflow[$currentIndex];
                 $dataCurrent->status = 'failed';
                 $dataCurrent->save();
 
-                $cuti = Cuti::find($id);
-                $cuti->status = 'failed';
-                $cuti->save();
+                $izin = Izin::find($id);
+                $izin->status = 'failed';
+                $izin->save();
             });
 
-            LivewireAlert::title('Reject Cuti Berhasil!')
+            LivewireAlert::title('Reject Izin Berhasil!')
                 ->position('top-end')
                 ->toast()
                 ->success()
                 ->show();
-            $this->render();
         } else {
             LivewireAlert::title('Tidak ada approval yang menunggu untuk jabatan ini')
                 ->position('top-end')
@@ -145,41 +142,40 @@ class PreviewCuti extends Component
         $user = $this->user;
 
         // eager load approvalLevel & pastikan urutan
-        $cutiApprovalWorkflow = CutiApprovalWorkflow::with('approvalLevel')
-            ->where('cuti_id', $id)
+        $izinApprovalWorkflow = IzinApprovalWorkflow::with('approvalLevel')
+            ->where('izin_id', $id)
             ->orderBy('id')
             ->get();
 
         // cari index yang sesuai jabatan user dan status waiting
-        $currentIndex = $cutiApprovalWorkflow->search(function ($item) use ($user) {
+        $currentIndex = $izinApprovalWorkflow->search(function ($item) use ($user) {
             return $item->approvalLevel->jabatan_id == $user->jabatan_id && $item->status != 'waiting';
         });
 
         if ($currentIndex !== false) {
-            //ubah status di CutiApprovalWorkflow
-            DB::transaction(function () use ($cutiApprovalWorkflow, $currentIndex, $id) {
-                $dataCurrent = $cutiApprovalWorkflow[$currentIndex];
+            //ubah status di IzinApprovalWorkflow
+            DB::transaction(function () use ($izinApprovalWorkflow, $currentIndex, $id) {
+                $dataCurrent = $izinApprovalWorkflow[$currentIndex];
                 $dataCurrent->status = 'waiting';
                 $dataCurrent->save();
 
                 // aktifkan pending untuk next nya
-                if (isset($cutiApprovalWorkflow[$currentIndex + 1])) {
-                    $dataNextIndex = $cutiApprovalWorkflow[$currentIndex + 1];
+                if (isset($izinApprovalWorkflow[$currentIndex + 1])) {
+                    $dataNextIndex = $izinApprovalWorkflow[$currentIndex + 1];
                     $dataNextIndex->status = 'pending';
                     $dataNextIndex->save();
                 }
 
-                $cuti = Cuti::find($id);
-                $cuti->status = 'pending';
-                $cuti->save();
+                $izin = Izin::find($id);
+                $izin->status = 'pending';
+                $izin->save();
             });
 
-            LivewireAlert::title('Approval Cuti Berhasil!')
+            LivewireAlert::title('Approval Izin Berhasil!')
                 ->position('top-end')
                 ->toast()
                 ->success()
                 ->show();
-            $this->render();
         } else {
             LivewireAlert::title('Tidak ada approval yang menunggu untuk jabatan ini')
                 ->position('top-end')

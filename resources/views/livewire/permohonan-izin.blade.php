@@ -80,6 +80,12 @@
                                     class="fa-solid fa-sitemap"></i></button>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-900">
+                         <a href="{{ route('preview-izin', $item->izin->id) }}">
+                                <x-button bg="[var(--primary)]" px="2" py="1.5"
+                                    label='<i class="fa-solid fa-eye"></i> Detail' />
+                            </a>
+                        </td>
+                        {{-- <td class="px-6 py-4 text-sm text-gray-900">
                             @if ($item->status === 'waiting')
                                 <x-button wire:click="reject({{ $item->izin->id }})" bg="[var(--danger)]" px="1.5"
                                     py="1.5" label='<i class="fa-solid fa-circle-xmark"></i>' />
@@ -89,7 +95,7 @@
                                 <x-button wire:click="backToWaiting({{ $item->izin->id }})" bg="[var(--warning)]"
                                     px="1.5" py="1.5" label='<i class="fa-solid fa-clock"></i>' />
                             @endif
-                        </td>
+                        </td> --}}
                     </tr>
                 @empty
                     <tr>

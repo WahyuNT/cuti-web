@@ -11,6 +11,7 @@ use App\Livewire\PermohonanIzin;
 use App\Livewire\Dashboard as DashboardLivewire;
 use App\Livewire\PermohonanCuti;
 use App\Livewire\PreviewCuti;
+use App\Livewire\PreviewIzin;
 
 Route::get('/login', [AuthController::class, 'indexLogin'])->name('login');
 Route::post('/login-store', [AuthController::class, 'loginStore'])->name('login-store');
@@ -28,5 +29,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/permohonan-cuti', PermohonanCuti::class)->name('permohonan-cuti');
     Route::get('/{id}/preview-cuti', PreviewCuti::class)->name('preview-cuti');
     Route::get('/permohonan-izin', PermohonanIzin::class)->name('permohonan-izin');
+    Route::get('/{id}/preview-izin', PreviewIzin::class)->name('preview-izin');
     Route::view('/manajemen-web', 'pages.manajemen-web')->name('manajemen-web');
 });
