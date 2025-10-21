@@ -25,7 +25,7 @@
 
                     <!-- Kanan (25%) -->
                     <div style="width: 1%; text-align: right;">
-                       
+
                     </div>
 
                 </div>
@@ -35,7 +35,7 @@
             <!-- Title -->
             <div style="text-align: center; margin-bottom: 30px;">
                 <h4 style="margin: 5px 0; font-size: 16px; text-decoration: underline;">SURAT IZIN</h4>
-                <p style="margin: 5px 0; font-size: 16px;">NOMOR ${nomor_naskah}</p>
+                <p style="margin: 5px 0; font-size: 16px;">NOMOR {{ $data['no_surat'] }}</p>
                 <p style="margin: 5px 0; font-size: 16px;">TENTANG</p>
                 <h4 style="margin: 5px 0; font-size: 16px; font-weight: bold;">IZIN MENINGGALKAN TUGAS SEMENTARA</h4>
             </div>
@@ -46,8 +46,9 @@
                     <tr>
                         <td style="width: 25%; vertical-align: top; padding: 5px 0;">Dasar</td>
                         <td style="width: 5%; vertical-align: top; padding: 5px 0;">:</td>
-                        <td style="vertical-align: top; padding: 5px 0;">Permohonan sdr(i) <strong>YUSI BUNGA LAMBA,
-                                A.Md</strong> Nip.197911022010012001</td>
+                        <td style="vertical-align: top; padding: 5px 0;">Permohonan sdr(i)
+                            <strong>{{ $data['user']['name'] }}</strong> Nip.{{ $data['user']['nip'] }}
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -67,22 +68,23 @@
                     <tr>
                         <td style="vertical-align: top; padding: 5px 0;">Nama</td>
                         <td style="vertical-align: top; padding: 5px 0;">:</td>
-                        <td style="vertical-align: top; padding: 5px 0;"><strong>YUSI BUNGA LAMBA, A.Md</strong></td>
+                        <td style="vertical-align: top; padding: 5px 0;"><strong>{{ $data['user']['name'] }}</strong>
+                        </td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top; padding: 5px 0;">NIP</td>
                         <td style="vertical-align: top; padding: 5px 0;">:</td>
-                        <td style="vertical-align: top; padding: 5px 0;">197911022010012001</td>
+                        <td style="vertical-align: top; padding: 5px 0;">{{ $data['user']['nip'] }}</td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top; padding: 5px 0;">Pangkat/Gol Ruang</td>
                         <td style="vertical-align: top; padding: 5px 0;">:</td>
-                        <td style="vertical-align: top; padding: 5px 0;">Penata Muda, III/a</td>
+                        <td style="vertical-align: top; padding: 5px 0;">Penata Muda, III/a xxxxxxxxxx</td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top; padding: 5px 0;">Jabatan</td>
                         <td style="vertical-align: top; padding: 5px 0;">:</td>
-                        <td style="vertical-align: top; padding: 5px 0;">Pengelola Data Informasi</td>
+                        <td style="vertical-align: top; padding: 5px 0;">{{ $data['user']['jabatan']['name'] }}</td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top; padding: 5px 0;">Instansi</td>
@@ -92,8 +94,7 @@
                     <tr>
                         <td style="vertical-align: top; padding: 5px 0;">Untuk</td>
                         <td style="vertical-align: top; padding: 5px 0;">:</td>
-                        <td style="vertical-align: top; padding: 5px 0;">Menghadiri Acara Keagaman selama 1 (Satu) hari,
-                            tanggal 17 September 2025 yang bersangkutan meninggalkan tugas sementara.</td>
+                        <td style="vertical-align: top; padding: 5px 0;">{{ $data['keperluan'] }}</td>
                     </tr>
                 </table>
             </div>

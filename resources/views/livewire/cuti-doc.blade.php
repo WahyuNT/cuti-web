@@ -1,7 +1,7 @@
 <div>
     <div style="font-family: Arial, sans-serif; margin: 30px; font-size: 16px;">
         <div style="text-align: center; margin-bottom: 10px;">
-            Mamuju, 18 Januari 2024
+            Mamuju, {{ $data['created_at']->format('d F Y') }}
         </div>
 
         <table style="width: 100%;; border-collapse: collapse; margin-bottom: 10px;">
@@ -29,7 +29,7 @@
                 <td style="border: 0px solid transparent; padding: 5px; width: 50%; vertical-align: bottom;">
                     <div style="text-align: center; margin-bottom: 20px;">
                         <h3 style="margin: 5px 0;text-align: left"><u>PERMINTAAN DAN PEMBERIAN CUTI</u></h3>
-                        <div style="text-align: left;">Nomor :</div>
+                        <div style="text-align: left;">Nomor : {{ $data['no_surat'] }}</div>
                     </div>
                 </td>
                 <td style="border: 0px solid transparent; padding: 5px; width: 25%; vertical-align: bottom;"></td>
@@ -46,19 +46,21 @@
             </tr>
             <tr>
                 <td style="border: 1px solid black; padding: 5px; width: 15%;">Nama</td>
-                <td style="border: 1px solid black; padding: 5px; width: 35%;"><strong>RONI, SE</strong></td>
+                <td style="border: 1px solid black; padding: 5px; width: 35%;">
+                    <strong>{{ $data['user']['name'] }}</strong>
+                </td>
                 <td style="border: 1px solid black; padding: 5px; width: 15%;">NIP</td>
-                <td style="border: 1px solid black; padding: 5px; width: 35%;">198303262015031004</td>
+                <td style="border: 1px solid black; padding: 5px; width: 35%;">{{ $data['user']['nip'] }}</td>
             </tr>
             <tr>
                 <td style="border: 1px solid black; padding: 5px;">Jabatan</td>
-                <td style="border: 1px solid black; padding: 5px;">Kasubid Perencanaan dan Anggaran</td>
+                <td style="border: 1px solid black; padding: 5px;">{{ $data['user']['jabatan']['name'] }}</td>
                 <td style="border: 1px solid black; padding: 5px;">Masa Kerja</td>
                 <td style="border: 1px solid black; padding: 5px;"></td>
             </tr>
             <tr>
                 <td style="border: 1px solid black; padding: 5px;">Unit Kerja</td>
-                <td style="border: 1px solid black; padding: 5px;">BPKAD Kab.Mamuju</td>
+                <td style="border: 1px solid black; padding: 5px;">BPKAD Kab.Mamuju xsxssxs</td>
                 <td style="border: 1px solid black; padding: 5px;"></td>
                 <td style="border: 1px solid black; padding: 5px;"></td>
             </tr>
@@ -117,7 +119,7 @@
                         CUTI</strong></td>
             </tr>
             <tr>
-                <td style="border: 1px solid black; padding: 5px;">Mengunjungi orang Tua di Kolaka</td>
+                <td style="border: 1px solid black; padding: 5px;">{{ $data['alasan'] }}</td>
             </tr>
         </table>
 

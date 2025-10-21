@@ -1,7 +1,7 @@
 <div class="flex justify-between">
     <div class="w-3/4 pe-3">
         <div class="bg-white rounded-xl w-full p-4">
-            @livewire('izin-doc')
+            @livewire('izin-doc', ['id' => $id])
         </div>
     </div>
     <div class="w-1/4 ">
