@@ -1,7 +1,7 @@
 <div class="flex justify-between">
     <div class="w-3/4 pe-3">
         <div class="bg-white rounded-xl w-full p-4">
-            s
+            @livewire('cuti-doc')
         </div>
     </div>
     <div class="w-1/4 ">
