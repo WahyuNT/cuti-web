@@ -91,7 +91,7 @@
                         <div class="flex items-end gap-2">
                             <x-select label="Pilih Jabatan" mb="0" for="jabatan_id" wire="jabatan_id"
                                 type="change" :options="$jabatanTypes" :required="true" />
-                            <x-button wire:click="resetInput({{ $item->id }})" bg="[var(--danger)]" px="1"
+                            <x-button wire:click="resetInput()" bg="[var(--danger)]" px="1"
                                 py="1" label='<i class="fa-solid  fa-x"></i>' />
                             <x-button wire:click="create" bg="[var(--success)]" px="1" py="1"
                                 label='<i class="fa-solid  fa-check"></i>' />
