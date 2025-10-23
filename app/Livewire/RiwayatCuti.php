@@ -9,6 +9,7 @@ use App\Models\Tahun;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RiwayatCuti extends Component
 {
@@ -55,6 +56,7 @@ class RiwayatCuti extends Component
 
         return view('livewire.riwayat-cuti', compact('data', 'tahunData', 'cutiTypesData'))->extends('layouts.master');
     }
+
     public function viewFlow($id)
     {
         $flowData = CutiApprovalWorkflow::with('approvalLevel')
@@ -83,5 +85,17 @@ class RiwayatCuti extends Component
     public function updatedStatus()
     {
         $this->resetPage();
+    }
+        public function downloadPdf()
+    {
+        $data = [
+            'judul' => 'Contoh PDF Livewire',
+            'tanggal' => date('d-m-Y')
+        ];
+
+        $html = view('livewire.cuti-doc')->render();
+
+        $pdf = Pdf::loadHTML($html);
+        $pdf->setOption('footer-right', '[page] of [toPage]');
     }
 }

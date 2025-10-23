@@ -32,7 +32,7 @@ class Register extends Component
             'nip'    => $this->nip,
             'status'     => 'active',
             'password' => bcrypt($this->password),
-            'role_id'     => null,
+            'role'     => null,
             'jabatan'     => null,
             'nomor_wa'     => null,
         ]);

@@ -78,7 +78,7 @@
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-900">
                             @if ($item->status === 'success')
-                                <button
+                                <button wire:clicl="downloadPdf"
                                     class="bg-[var(--primary)] text-white px-1 py-1 rounded-md hover:cursor-pointer hover:scale-105"><i
                                         class="fa-solid fa-print"></i></button>
                             @else
