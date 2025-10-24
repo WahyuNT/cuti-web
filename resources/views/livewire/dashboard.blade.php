@@ -30,7 +30,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="2" class="text-center">Data tidak ada</td>
+                                        <td colspan="2" class="text-center">-</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -54,7 +54,7 @@
                         </div>
                     @empty
                         <div class="grid grid-cols-1 justify-center text-center ps-3 text-sm py-1">
-                            <div class="text-left">Cuti Tidak Ada</div>
+                            <div class="text-left">-</div>
                         </div>
                     @endforelse
                 </div>

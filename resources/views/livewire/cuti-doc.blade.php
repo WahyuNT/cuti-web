@@ -1,3 +1,6 @@
+@php
+    $totalCutiTahunan = count($cutiTahunan);
+@endphp
 <div>
     <div style="font-family: Arial, sans-serif; margin: 30px; font-size: 16px;">
         <div style="text-align: center; margin-bottom: 10px;">
@@ -147,43 +150,50 @@
                 <td style="vertical-align: top; padding:0; width:50%;">
                     <table style="width:100%; border-collapse: collapse;">
                         <tr>
+                            <td style="border:1px solid black; padding:5px;" colspan="3">CUTI TAHUNAN</td>
+                        </tr>
+                        <tr>
                             <td style="border:1px solid black; padding:5px;">TAHUN</td>
                             <td style="border:1px solid black; padding:5px;">SISA</td>
-                            <td style="border:1px solid black; padding:5px;border-right: 0px">KETERANGAN</td>
+                            <td style="border:1px solid black; padding:5px;border-right: 1px solid black">KETERANGAN
+                            </td>
                         </tr>
-                        <tr>
-                            <td style="border:1px solid black; padding:5px;">N-2</td>
-                            <td style="border:1px solid black; padding:5px;"></td>
-                            <td style="border:1px solid black; padding:5px;border-right: 0px"></td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid black; padding:5px;">N-1</td>
-                            <td style="border:1px solid black; padding:5px;"></td>
-                            <td style="border:1px solid black; padding:5px;border-right: 0px"></td>
-                        </tr>
+                        @forelse ($cutiTahunan as $item)
+                            @php
+                                $index = $totalCutiTahunan - $loop->iteration;
+                            @endphp
+                            <tr>
+                                <td style="border:1px solid black; padding:5px;">
+                                    N{{ $index == 0 ? '' : '-' . $index }}
+                                </td>
+                                <td style="border:1px solid black; padding:5px;">
+                                    @if ($loop->last)
+                                        {{ $item->sisa_kuota }}
+                                    @else
+                                        {{ $item->sisa_cuti_tersimpan }}
+                                    @endif
+                                </td>
+                                <td style="border:1px solid black; padding:5px; border-right:1px solid black;"></td>
+                            </tr>
+                        @empty
+                        @endforelse
                     </table>
                 </td>
                 <td style="vertical-align: top; padding:0; width:50%;">
                     <table style="width:100%; border-collapse: collapse;">
-                        <tr>
-                            <td style="border:1px solid black; padding:5px;">4. Cuti Alasan Penting</td>
-                            <td
-                                style="border:1px solid black; border-left:1px solid black; border-bottom:0; width:70px; text-align:center;">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid black; border-top:0; padding:5px;">5. Cuti Besar</td>
-                            <td
-                                style="border:1px solid black; border-left:1px solid black; border-bottom:0; width:70px; text-align:center;">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid black; border-top:0; padding:5px;">6. Cuti di Luar Tanggungan
-                                Negara</td>
-                            <td
-                                style="border:1px solid black; border-left:1px solid black; border-bottom:1px solid black; width:70px; text-align:center;">
-                            </td>
-                        </tr>
+                        @forelse($cuti_type as $item)
+                            <tr>
+                                <td
+                                    style="border:1px solid black;{{ $loop->iteration > 5 ? 'border-left:1px solid black; ' : ' border-left:0;' }} solid black; padding:5px;">
+                                    {{ $loop->iteration + 1 }}.
+                                    {{ $item->cuti_type }}</td>
+                                <td
+                                    style="border:1px solid black; border-left:1px solid black; border-bottom:1px solid black; width:70px; text-align:center;">
+                                    {{ $item->sisa_kuota }}
+                                </td>
+                            </tr>
+                        @empty
+                        @endforelse
                     </table>
                 </td>
             </tr>

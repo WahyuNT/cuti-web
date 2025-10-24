@@ -6,6 +6,8 @@ use App\Models\Cuti;
 use App\Models\CutiApprovalWorkflow;
 use App\Models\CutiUser;
 use App\Models\User;
+use App\Models\ViewCutiKuota;
+use App\Models\ViewCutiTahunan;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -45,7 +47,38 @@ class CutiDoc extends Component
         $tanggalCuti = $this->summaryDate($data->tanggal);
 
 
-        return view('livewire.cuti-doc', compact('data', 'atasan1', 'atasan2', 'cutiData', 'leftItems', 'rightItems', 'tanggalCuti'));
+        $cutiTypeTanpaTahunan = ViewCutiKuota::where('user_id', $data->user_id)
+            ->where('is_count', '0')
+            ->where('tahun', now()->setTimezone('Asia/Jakarta')->year)
+            ->select('cuti_type_id', 'cuti_type', 'sisa_kuota')
+            ->get();
+
+        $cutiTypeTahunan = ViewCutiTahunan::where('user_id', $data->user_id)
+            ->select('cuti_type_id', 'cuti_type', 'sisa_kuota')
+            ->get();
+        $cuti_type = $cutiTypeTanpaTahunan->concat($cutiTypeTahunan)->values();
+        $cutiTahunan = ViewCutiKuota::where('user_id', $data->user_id)
+            ->where('is_count', '1')
+            ->select('tahun', 'sisa_kuota', 'sisa_cuti_tersimpan')
+            ->take(3)
+            ->orderBy('tahun', 'desc') // ambil 3 terbaru
+            ->get();
+
+        // Urutkan naik (lama -> baru)
+        $cutiTahunan = $cutiTahunan->sortBy('tahun')->values();
+
+        // tambahin placeholder di depan sampai total 3
+        while ($cutiTahunan->count() < 3) {
+            $cutiTahunan->prepend((object)[
+                'tahun' => null,
+                'sisa_kuota' => 0,
+                'sisa_cuti_tersimpan' => 0,
+            ]);
+        }
+ 
+
+
+        return view('livewire.cuti-doc', compact('data', 'atasan1', 'atasan2', 'cutiData', 'leftItems', 'rightItems', 'tanggalCuti', 'cutiTahunan', 'cuti_type'));
     }
 
     private function splitCutiData($cutiData)
