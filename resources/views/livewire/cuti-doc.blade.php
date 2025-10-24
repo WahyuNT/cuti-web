@@ -243,7 +243,10 @@
                 <td style="border: 1px solid black; padding: 5px; vertical-align: bottom; text-align: right;">
                     <div style="text-align:center">
                         <div>{{ $atasan1->jabatan->name }}</div>
-                        <div style="margin-top: 50px;"><strong><u>{{ $atasan1->name }}</u></strong></div>
+                        <div style="text-align:center">
+                            {!! QrCode::generate($atasan1->name); !!}
+                        </div>
+                        <div style=""><strong><u>{{ $atasan1->name }}</u></strong></div>
                         <div style="font-size: 16px;">Pangkat : {{ $atasan1->pangkatRef->name }}</div>
                         <div style="font-size: 16px;">Nip.{{ $atasan1->nip }}</div>
                     </div>
@@ -273,7 +276,10 @@
                     <div style="text-align:center">
                         <div>a.n. Bupati Mamuju</div>
                         <div>{{ $atasan2->jabatan->name }}</div>
-                        <div style="margin-top: 50px;"><strong><u>{{ $atasan2->name }}</u></strong></div>
+                          <div style="text-align:center">
+                            {!! QrCode::generate($atasan2->name); !!}
+                        </div>
+                        <div style=""><strong><u>{{ $atasan2->name }}</u></strong></div>
                         <div style="font-size: 16px;">Pangkat : {{ $atasan2->pangkatRef->name }}</div>
                         <div style="font-size: 16px;">Nip.{{ $atasan2->nip }}</div>
                     </div>

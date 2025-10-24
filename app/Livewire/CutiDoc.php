@@ -10,6 +10,7 @@ use App\Models\ViewCutiKuota;
 use App\Models\ViewCutiTahunan;
 use Carbon\Carbon;
 use Livewire\Component;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CutiDoc extends Component
 {
@@ -75,7 +76,13 @@ class CutiDoc extends Component
                 'sisa_cuti_tersimpan' => 0,
             ]);
         }
- 
+
+        // $qrAtasan1 = base64_encode(
+        //     QrCode::format('png')->size(100)->generate($atasan1->name)
+        // );
+        // $qrAtasan2 = base64_encode(
+        //     QrCode::format('png')->size(100)->generate($atasan2->name)
+        // );
 
 
         return view('livewire.cuti-doc', compact('data', 'atasan1', 'atasan2', 'cutiData', 'leftItems', 'rightItems', 'tanggalCuti', 'cutiTahunan', 'cuti_type'));
