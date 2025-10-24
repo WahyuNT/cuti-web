@@ -75,8 +75,9 @@
                                     Diterima
                                 @elseif ($item->status === 'failed')
                                     Ditolak
-                                @else
-                                    Menunggu
+                                @elseif($item->status === 'waiting')
+                                    Menunggu Persetujuan Anda
+                                
                                 @endif
                             </span>
                         </td>
