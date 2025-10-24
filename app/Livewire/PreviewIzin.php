@@ -68,11 +68,12 @@ class PreviewIzin extends Component
                 $dataCurrent->save();
 
                 // aktifkan next approver kalau ada
-                if (isset($izinApprovalWorkflow[$currentIndex + 1])) {
-                    $dataNextIndex = $izinApprovalWorkflow[$currentIndex + 1];
-                    $dataNextIndex->status = 'waiting';
-                    $dataNextIndex->save();
+                for ($i = $currentIndex + 1; $i < count($izinApprovalWorkflow); $i++) {
+                    $dataNext = $izinApprovalWorkflow[$i];
+                    $dataNext->status = 'pending';
+                    $dataNext->save();
                 }
+
 
                 // cek apakah ini index terakhir
                 $lastIndex = $izinApprovalWorkflow->count() - 1;
