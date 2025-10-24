@@ -58,7 +58,7 @@
             </tr>
             <tr>
                 <td style="border: 1px solid black; padding: 5px;">Unit Kerja</td>
-                <td style="border: 1px solid black; padding: 5px;">BPKAD Kab.Mamuju xsxssxs</td>
+                <td style="border: 1px solid black; padding: 5px;">BPKAD Kab.Mamuju</td>
                 <td style="border: 1px solid black; padding: 5px;"></td>
                 <td style="border: 1px solid black; padding: 5px;"></td>
             </tr>
@@ -76,49 +76,35 @@
         <!-- Checklist: two-column table (DomPDF-friendly) -->
         <table style="width: 100%; border-collapse: collapse; margin-bottom:15px;">
             <tr>
+                {{-- Kolom kiri --}}
                 <td style="vertical-align: top; padding:0; width:50%;">
                     <table style="width:100%; border-collapse: collapse;">
-                        <tr>
-                            <td style="border:1px solid black; padding:5px;">1. Cuti Tahunan</td>
-                            <td
-                                style="border:1px solid black; border-left:0px solid black; border-bottom:0; width:40px; text-align:center;border-right: 0px">
-                                ✓</td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid black; border-top:0; padding:5px;">2. Cuti Sakit</td>
-                            <td
-                                style="border:1px solid black; border-left:0px solid black; border-bottom:0; width:40px; text-align:center;border-right: 0px">
-                                ✓</td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid black; border-top:0; padding:5px;">3. Cuti Melahirkan</td>
-                            <td
-                                style="border:1px solid black; border-left:0px solid black; border-bottom:1px solid black; width:40px; text-align:center;border-right: 0px">
-                                ✓</td>
-                        </tr>
+                        @foreach ($leftItems as $index => $item)
+                            <tr>
+                                <td style="border:1px solid black; padding:5px;">
+                                    {{ $loop->iteration * 2 - 1 }}. {{ $item->cuti->name ?? '-' }}
+                                </td>
+                                <td style="border:1px solid black; border-left:0; width:40px; text-align:center;">
+                                    {{ $data->cuti_type_id == $item->cuti_type_id ? '✓' : '' }}
+                                </td>
+                            </tr>
+                        @endforeach
                     </table>
                 </td>
+
+                {{-- Kolom kanan --}}
                 <td style="vertical-align: top; padding:0; width:50%;">
                     <table style="width:100%; border-collapse: collapse;">
-                        <tr>
-                            <td style="border:1px solid black; padding:5px;">4. Cuti Alasan Penting</td>
-                            <td
-                                style="border:1px solid black; border-left:1px solid black; border-right:1px solid black; border-bottom:0; width:40px; text-align:center;">
-                                ✓</td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid black; border-top:0; padding:5px;">5. Cuti Besar</td>
-                            <td
-                                style="border:1px solid black; border-left:1px solid black; border-right:1px solid black; border-bottom:0; width:40px; text-align:center;">
-                                ✓</td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid black; border-top:0; padding:5px;">6. Cuti di Luar Tanggungan
-                                Negara</td>
-                            <td
-                                style="border:1px solid black; border-left:1px solid black; border-right:1px solid black; border-bottom:1px solid black; width:40px; text-align:center;">
-                                ✓</td>
-                        </tr>
+                        @foreach ($rightItems as $index => $item)
+                            <tr>
+                                <td style="border:1px solid black; border-left:0px solid black; padding:5px;">
+                                    {{ $loop->iteration * 2 }}. {{ $item->cuti->name ?? '-' }}
+                                </td>
+                                <td style="border:1px solid black; border-left:0; width:40px; text-align:center;">
+                                    {{ $data->cuti_type_id == $item->cuti_type_id ? '✓' : '' }}
+                                </td>
+                            </tr>
+                        @endforeach
                     </table>
                 </td>
             </tr>
@@ -142,8 +128,8 @@
                         CUTI</strong></td>
             </tr>
             <tr>
-                <td style="border: 1px solid black; padding: 5px;">12 ( Dua Belas ) Hari kerja, Mulai tanggal 23 Januari
-                    2024 s/d 07 Februari 2024</td>
+                <td style="border: 1px solid black; padding: 5px;">{{ $tanggalCuti['jumlah'] }} Hari kerja, Mulai
+                    tanggal {{ $tanggalCuti['terkecil'] }} s/d {{ $tanggalCuti['terbesar'] }}</td>
             </tr>
         </table>
 

@@ -13,7 +13,8 @@
                         </a>
                         <h2 class="p-0 m-0 text-center text-2xl font-bold">Manajemen Cuti {{ $user->name }}</h2>
                         <button wire:click="$set('mode', 'add')"
-                            class="px-3 py-1 rounded-md bg-[var(--primary)] text-white">Tambah Cuti</button>
+                            class="px-3 py-1 rounded-md bg-[var(--primary)] hover:cursor-pointer text-white">Tambah
+                            Cuti</button>
                     </div>
 
                     <div class="flex flex-col md:flex-row gap-4 mt-3">
@@ -165,15 +166,18 @@
                                                                     py="1.5"
                                                                     label='<i class="fa-solid fa-pen"></i>' />
                                                                 <x-button
-                                                                    wire:click="$set('deleteId', {{ $item->id_cuti }})"
+                                                                    wire:click="confirmDelete({{ $item->id_cuti }})"
                                                                     bg="[var(--danger)]" px="1.5"
                                                                     py="1.5"
-                                                                    label='<i class="fa-solid fa-trash"></i>' />
+                                                                    label='<i class="fa-solid fa-trash"></i>'
+                                                                    :disabled="$item->total_dipakai != 0 ||
+                                                                        $item->cuti_tersimpan_digunakan != 0" />
+
                                                             </div>
                                                         @else
                                                             <p class="text-center">Apa anda yakin?</p>
                                                             <div class="flex flex-row gap-1 justify-center mb-1">
-                                                                <x-button wire:click="$set('deleteId', null)"
+                                                                <x-button wire:click="batalDelete"
                                                                     bg="[var(--success)]" px="1.5"
                                                                     py="1.5"
                                                                     label='<i class="fa-solid fa-x"></i>' />
@@ -233,8 +237,8 @@
 
                             @if ($modeRiwayat != 'mapping')
                                 <div class="w-full md:w-1/3 lg:w-1/6">
-                                    <x-select label="" for="tahunFilter" wire="tahunFilter" wireType="change"
-                                        placeholder="Semua Tahun" :options="$tahunData" />
+                                    <x-select label="" for="tahunRiwayat" wire="tahunRiwayat"
+                                        wireType="change" placeholder="Semua Tahun" :options="$tahunData" />
                                 </div>
                             @endif
                         </div>
@@ -350,7 +354,7 @@
                                 </div>
 
                                 <div class="w-1/2">
-         
+
                                     <table class="w-full text-sm text-left text-gray-700 overflow-hidden">
                                         <thead class="text-xs text-gray-700 uppercase bg-gray-100 rounded-t-xl">
                                             <tr>
@@ -398,9 +402,9 @@
                         </div>
 
                         <div class="w-full lg:w-1/2 px-2 mb-3">
-                            <x-select label="Tahun" for="tahunFilter" wire="tahunFilter" wireType="change"
+                            <x-select label="Tahun" for="tahun" wire="tahun" wireType="change"
                                 placeholder="Semua Tahun" :options="$tahunData" />
-        
+
                         </div>
 
                         <div class="w-full lg:w-1/2 px-2 mb-3">

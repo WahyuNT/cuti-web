@@ -25,6 +25,7 @@ class ManajamenCutiUser extends Component
 
     public $tahunFilter;
     public $cutiTypeFilter;
+    // public $deleteId;
 
     public $perPage = 10;
     public $currentPageKuota = 1;
@@ -118,7 +119,7 @@ class ManajamenCutiUser extends Component
         $this->validate([
             'cuti_type_id' => 'required',
             'kuota' => 'required|numeric',
-            'tahun' => 'required|numeric',
+            'tahun' => 'required',
             'cuti_tersimpan' => 'nullable|numeric',
         ]);
         $data = CutiUser::create([
