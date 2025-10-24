@@ -4,7 +4,7 @@
             Mamuju, {{ $data['created_at']->format('d F Y') }}
         </div>
 
-        <table style="width: 100%;; border-collapse: collapse; margin-bottom: 10px;">
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
             <tr>
                 <td style="border: 0px solid transparent; padding: 5px; width: 55%; vertical-align: top;"></td>
                 <td
@@ -22,20 +22,18 @@
             </tr>
         </table>
 
-
-        <table style="width: 100%;; border-collapse: collapse; margin-bottom: 10px;">
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
             <tr>
                 <td style="border: 0px solid transparent; padding: 5px; width: 30%; vertical-align: top;"></td>
                 <td style="border: 0px solid transparent; padding: 5px; width: 50%; vertical-align: bottom;">
                     <div style="text-align: center; margin-bottom: 20px;">
-                        <h3 style="margin: 5px 0;text-align: left"><u>PERMINTAAN DAN PEMBERIAN CUTI</u></h3>
+                        <h3 style="margin: 5px 0; text-align: left;"><u>PERMINTAAN DAN PEMBERIAN CUTI</u></h3>
                         <div style="text-align: left;">Nomor : {{ $data['no_surat'] }}</div>
                     </div>
                 </td>
                 <td style="border: 0px solid transparent; padding: 5px; width: 25%; vertical-align: bottom;"></td>
             </tr>
         </table>
-
 
         <!-- I. DATA PEGAWAI -->
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
@@ -66,7 +64,6 @@
             </tr>
         </table>
 
-
         <!-- II. JENIS CUTI -->
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 0px;">
             <tr>
@@ -75,44 +72,59 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-collapse: collapse;margin-bottom:15px">
+
+        <!-- Checklist: two-column table (DomPDF-friendly) -->
+        <table style="width: 100%; border-collapse: collapse; margin-bottom:15px;">
             <tr>
-                <td style="padding: 0; border: none;">
-                    <div style="column-count: 2; column-gap: 0px;">
-                        <div style="display: flex; border: 1px solid black;">
-                            <div style="flex: 1; padding: 5px;">1. Cuti Tahunan</div>
-                            <div style="width: 40px; text-align: center; border-left: 1px solid black;">✓</div>
-                        </div>
-                        <div style="display: flex; border: 1px solid black;">
-                            <div style="flex: 1; padding: 5px;">2. Cuti Sakit</div>
-                            <div style="width: 40px; text-align: center; border-left: 1px solid black;">✓</div>
-                        </div>
-                        <div style="display: flex; border: 1px solid black;">
-                            <div style="flex: 1; padding: 5px;">3. Cuti Melahirkan</div>
-                            <div style="width: 40px; text-align: center; border-left: 1px solid black;">✓</div>
-                        </div>
-                        <div style="display: flex; border: 1px solid black;">
-                            <div style="flex: 1; padding: 5px;">4. Cuti Alasan Penting</div>
-                            <div style="width: 40px; text-align: center; border-left: 1px solid black;">✓</div>
-                        </div>
-                        <div style="display: flex; border: 1px solid black;">
-                            <div style="flex: 1; padding: 5px;">5. Cuti Besar</div>
-                            <div style="width: 40px; text-align: center; border-left: 1px solid black;">✓</div>
-                        </div>
-                        <div style="display: flex; border: 1px solid black;">
-                            <div style="flex: 1; padding: 5px;">6. Cuti di Luar Tanggungan Negara</div>
-                            <div style="width: 40px; text-align: center; border-left: 1px solid black;">✓</div>
-                        </div>
-                    </div>
+                <td style="vertical-align: top; padding:0; width:50%;">
+                    <table style="width:100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="border:1px solid black; padding:5px;">1. Cuti Tahunan</td>
+                            <td
+                                style="border:1px solid black; border-left:0px solid black; border-bottom:0; width:40px; text-align:center;border-right: 0px">
+                                ✓</td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid black; border-top:0; padding:5px;">2. Cuti Sakit</td>
+                            <td
+                                style="border:1px solid black; border-left:0px solid black; border-bottom:0; width:40px; text-align:center;border-right: 0px">
+                                ✓</td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid black; border-top:0; padding:5px;">3. Cuti Melahirkan</td>
+                            <td
+                                style="border:1px solid black; border-left:0px solid black; border-bottom:1px solid black; width:40px; text-align:center;border-right: 0px">
+                                ✓</td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="vertical-align: top; padding:0; width:50%;">
+                    <table style="width:100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="border:1px solid black; padding:5px;">4. Cuti Alasan Penting</td>
+                            <td
+                                style="border:1px solid black; border-left:1px solid black; border-right:1px solid black; border-bottom:0; width:40px; text-align:center;">
+                                ✓</td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid black; border-top:0; padding:5px;">5. Cuti Besar</td>
+                            <td
+                                style="border:1px solid black; border-left:1px solid black; border-right:1px solid black; border-bottom:0; width:40px; text-align:center;">
+                                ✓</td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid black; border-top:0; padding:5px;">6. Cuti di Luar Tanggungan
+                                Negara</td>
+                            <td
+                                style="border:1px solid black; border-left:1px solid black; border-right:1px solid black; border-bottom:1px solid black; width:40px; text-align:center;">
+                                ✓</td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
 
-
-
-
         <!-- III. ALASAN CUTI -->
-
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
             <tr>
                 <td style="border: 1px solid black; padding: 5px; background-color: transparent;"><strong>III. ALASAN
@@ -143,70 +155,53 @@
                 </td>
             </tr>
         </table>
-        <div style="display: flex; gap: 00px; width: 100%;">
-            <!-- TABEL KIRI -->
-            <table style="width: 50%; border-collapse: collapse; margin-bottom: 15px;">
-                <tr>
-                    <td colspan="3" style="border: 1px solid black; padding: 5px;">1. CUTI TAHUNAN</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid black; padding: 5px;text-align:center">TAHUN</td>
-                    <td style="border: 1px solid black; padding: 5px;text-align:center">SISA</td>
-                    <td style="border: 1px solid black; padding: 5px;text-align:center">KETERANGAN</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid black; padding: 5px;text-align:left">N-2</td>
-                    <td style="border: 1px solid black; padding: 5px;text-align:center"></td>
-                    <td style="border: 1px solid black; padding: 5px;text-align:center"></td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid black; padding: 5px;text-align:left">N-1</td>
-                    <td style="border: 1px solid black; padding: 5px;text-align:left"></td>
-                    <td style="border: 1px solid black; padding: 5px;text-align:left"></td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid black; padding: 5px;text-align:left">N</td>
-                    <td style="border: 1px solid black; padding: 5px;text-align:left"></td>
-                    <td style="border: 1px solid black; padding: 5px;text-align:left"></td>
-                </tr>
-            </table>
 
-            <!-- TABEL KANAN -->
-            <table style="width: 50%; border-collapse: collapse; margin-bottom: 15px; ">
-                <tr>
-                    <td
-                        style="width: 80%; border: 1px solid black; padding: 5px; text-align:left; border-left: 0px solid black">
-                        2. Cuti Besar</td>
-                    <td style="width: 20%; border: 1px solid black; padding: 5px; text-align:center;"></td>
-                </tr>
-                <tr>
-                    <td
-                        style="width: 80%; border: 1px solid black; padding: 5px; text-align:left; border-left: 0px solid black">
-                        3. Cuti Sakit</td>
-                    <td style="width: 20%; border: 1px solid black; padding: 5px; text-align:center;"></td>
-                </tr>
-                <tr>
-                    <td
-                        style="width: 80%; border: 1px solid black; padding: 5px; text-align:left; border-left: 0px solid black">
-                        4. Cuti Melahirkan</td>
-                    <td style="width: 20%; border: 1px solid black; padding: 5px; text-align:center;"></td>
-                </tr>
-                <tr>
-                    <td
-                        style="width: 80%; border: 1px solid black; padding: 5px; text-align:left; border-left: 0px solid black">
-                        5. Cuti Karena Alasan Penting</td>
-                    <td style="width: 20%; border: 1px solid black; padding: 5px; text-align:center;"></td>
-                </tr>
-                <tr>
-                    <td
-                        style="width: 80%; border: 1px solid black; padding: 5px; text-align:left; border-left: 0px solid black">
-                        6. Cuti di Luar Tanggungan Negara</td>
-                    <td style="width: 20%; border: 1px solid black; padding: 5px; text-align:center;"></td>
-                </tr>
-            </table>
-
-        </div>
-
+        <table style="width: 100%; border-collapse: collapse; margin-bottom:15px;">
+            <tr>
+                <td style="vertical-align: top; padding:0; width:50%;">
+                    <table style="width:100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="border:1px solid black; padding:5px;">TAHUN</td>
+                            <td style="border:1px solid black; padding:5px;">SISA</td>
+                            <td style="border:1px solid black; padding:5px;border-right: 0px">KETERANGAN</td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid black; padding:5px;">N-2</td>
+                            <td style="border:1px solid black; padding:5px;"></td>
+                            <td style="border:1px solid black; padding:5px;border-right: 0px"></td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid black; padding:5px;">N-1</td>
+                            <td style="border:1px solid black; padding:5px;"></td>
+                            <td style="border:1px solid black; padding:5px;border-right: 0px"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="vertical-align: top; padding:0; width:50%;">
+                    <table style="width:100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="border:1px solid black; padding:5px;">4. Cuti Alasan Penting</td>
+                            <td
+                                style="border:1px solid black; border-left:1px solid black; border-bottom:0; width:70px; text-align:center;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid black; border-top:0; padding:5px;">5. Cuti Besar</td>
+                            <td
+                                style="border:1px solid black; border-left:1px solid black; border-bottom:0; width:70px; text-align:center;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid black; border-top:0; padding:5px;">6. Cuti di Luar Tanggungan
+                                Negara</td>
+                            <td
+                                style="border:1px solid black; border-left:1px solid black; border-bottom:1px solid black; width:70px; text-align:center;">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
 
         <!-- VI. ALAMAT YANG MENJALANKAN CUTI -->
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
@@ -223,7 +218,7 @@
             <tr>
                 <td style="border: 1px solid black; padding: 5px; width: 25%; vertical-align: top;"></td>
                 <td style="border: 1px solid black; padding: 5px; width: 25%; vertical-align: top;"></td>
-                <td style="border: 1px solid black; padding: 5px; width: 25%; vertical-align: top;text-align:center">
+                <td style="border: 1px solid black; padding: 5px; width: 25%; vertical-align: top; text-align:center;">
                     <div><strong>RONI SE</strong></div>
                     <div style="margin-top: 60px;"><strong><u>RONI SE</u></strong></div>
                     <div>Pangkat : Penata</div>
@@ -242,8 +237,7 @@
             <tr>
                 <td style="border: 1px solid black; padding: 5px; width: 23%; text-align: center;">DISETUJUI</td>
                 <td style="border: 1px solid black; padding: 5px; width: 23%; text-align: center;">PERUBAHAN ****</td>
-                <td style="border: 1px solid black; padding: 5px; width: 23%; text-align: center;">DITANGGUHKAN****
-                </td>
+                <td style="border: 1px solid black; padding: 5px; width: 23%; text-align: center;">DITANGGUHKAN****</td>
                 <td style="border: 1px solid black; padding: 5px; width: 30%; text-align: center;">DISETUJUI</td>
             </tr>
             <tr>

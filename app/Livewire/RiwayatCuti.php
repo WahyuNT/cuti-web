@@ -63,7 +63,7 @@ class RiwayatCuti extends Component
             ->where('cuti_id', $id)
             ->orderBy('id')
             ->get();
-            
+
         $this->flowData = $flowData;
     }
     public function updatedFilter()
@@ -86,16 +86,16 @@ class RiwayatCuti extends Component
     {
         $this->resetPage();
     }
-        public function downloadPdf()
+    public function downloadPdf($id)
     {
-        $data = [
-            'judul' => 'Contoh PDF Livewire',
-            'tanggal' => date('d-m-Y')
-        ];
+        $data = Cuti::find($id);
 
-        $html = view('livewire.cuti-doc')->render();
+        $html = view('livewire.cuti-doc', ['data' => $data])->render();
 
-        $pdf = Pdf::loadHTML($html);
-        $pdf->setOption('footer-right', '[page] of [toPage]');
+        $pdf = Pdf::loadHTML($html)->setPaper('a4', 'portrait'); // tambahin ini
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'Surat Cuti.pdf');
     }
 }

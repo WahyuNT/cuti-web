@@ -69,9 +69,15 @@
                                         bg-[var(--warning)] @endif">{{ ucfirst($item->status) }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-900"><button
-                                class="bg-[var(--primary)] text-white px-1 py-1 rounded-md hover:cursor-pointer hover:scale-105"><i
-                                    class="fa-solid fa-print"></i></button>
+                        <td class="px-6 py-4 text-sm text-gray-900">
+                            @if ($item->status === 'success')
+                                <button wire:click="downloadPdf({{ $item->id }})"
+                                    class="bg-[var(--primary)] text-white px-1 py-1 rounded-md hover:cursor-pointer hover:scale-105"><i
+                                        class="fa-solid fa-print"></i></button>
+                            @else
+                                <x-button disabled="true" bg="gray-500" px="1" py="1"
+                                    label='<i class="fa-solid fa-print"></i>' />
+                            @endif
                         </td>
                     </tr>
                 @empty

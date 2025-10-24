@@ -1,9 +1,6 @@
 <div>
-    <div style="font-family: 'Times New Roman', Times, serif; margin: 0; padding: 20px; background-color: #f5f5f5;">
-        <div
-            style="max-width: 800px; margin: 0 auto; background-color: white; padding: 40px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-            <!-- Header -->
-            <div style="text-align: center; margin-bottom: 30px; border-bottom: 3px solid #000; padding-bottom: 20px;">
+    <div style="font-family: 'Times New Roman', Times, serif; margin: 0; padding: 20px; background-color: transparent;">
+        <div style="text-align: center; margin-bottom: 30px; border-bottom: 3px solid #000; padding-bottom: 20px;">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0px;">
 
                     <!-- Kiri (25%) -->
@@ -109,16 +106,15 @@
                         style="width: 40%; border: 1px solid black; padding: 5px; text-align: left; border:0px transparent">
                         <div style="margin-top: 0; text-align: left; font-size: 14px;">
                             <p style="margin: 5px 0;">Mamuju, 8 September 2025</p>
-                            <p style="margin: 5px 0;">${jabatan_pengirim},</p>
+                            <p style="margin: 5px 0;">{{$data->user->jabatan->name}},</p>
                             <div style="height: 80px;"></div>
                             <p style="margin: 5px 0; font-weight: bold;">${ttd_pengirim}</p>
-                            <p style="margin: 5px 0; font-weight: bold;">${nama_pengirim}</p>
-                            <p style="margin: 5px 0;">Pangkat : Pembina Utama Muda/(IV/c)</p>
-                            <p style="margin: 5px 0;">NIP.${nip_pengirim}</p>
+                            <p style="margin: 5px 0; font-weight: bold;">{{ $data->user->name }}</p>
+                            <p style="margin: 5px 0;">Pangkat : -</p>
+                            <p style="margin: 5px 0;">NIP.{{ $data->user->nip }}</p>
                         </div>
                     </td>
                 </tr>
             </table>
-        </div>
     </div>
 </div>

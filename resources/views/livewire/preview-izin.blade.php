@@ -1,7 +1,14 @@
-<div class="flex justify-between">
-    <div class="w-3/4 pe-3">
-        <div class="bg-white rounded-xl w-full p-4">
+<div class="flex justify-between mb-3">
+    <div class="w-3/4 pe-3 flex justify-start">
+        <a href="{{ route('permohonan-izin') }}" class="me-3">
+            <x-button bg="[var(--primary)]" px="1.5" py="1.5" label='<i class="fa-solid fa-arrow-left"></i> Kembali' />
+
+        </a>
+        <div class=" rounded-xl w-full p-4 bg-white  max-w-4xl">
+
+
             @livewire('izin-doc', ['id' => $id])
+
         </div>
     </div>
     <div class="w-1/4 ">

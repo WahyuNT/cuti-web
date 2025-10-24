@@ -8,6 +8,7 @@ use App\Models\Tahun;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RiwayatIzin extends Component
 {
@@ -70,5 +71,17 @@ class RiwayatIzin extends Component
     public function updatedStatus()
     {
         $this->resetPage();
+    }
+    public function downloadPdf($id)
+    {
+        $data = Izin::find($id);
+
+        $html = view('livewire.izin-doc', ['data' => $data])->render();
+
+        $pdf = Pdf::loadHTML($html)->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'Surat Izin.pdf');
     }
 }
