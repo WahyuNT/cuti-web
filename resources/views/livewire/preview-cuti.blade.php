@@ -2,7 +2,7 @@
     <div class="w-3/4 pe-3 flex justify-start">
         <a href="{{ route('permohonan-cuti') }}" class="me-3">
             <x-button bg="[var(--primary)]" px="1.5" py="1.5"
-                label='<i class="fa-solid fa-arrow-left"></i> Kembali' />
+                label='<i class="fa-solid fa-arrow-left"></i>' />
 
         </a>
         <div class=" rounded-xl w-full p-4 bg-white  max-w-4xl">
@@ -60,7 +60,7 @@
                         <button wire:click="backToWaiting({{ $id }})" type="button"
                             data-modal-target="default-modal" data-modal-toggle="default-modal"
                             class="text-white w-full bg-[var(--warning)] hover:brightness-90 hover:cursor-pointer font-medium rounded-lg text-sm px-1.5 py-2 me-2 "><i
-                                class="fa-solid fa-clock"></i> Pending</button>
+                                class="fa-solid fa-clock"></i> Kembali ke Pending</button>
                     @endif
                 </div>
             </div>

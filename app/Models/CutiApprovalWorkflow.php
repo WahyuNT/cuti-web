@@ -11,6 +11,7 @@ class CutiApprovalWorkflow extends Model
     protected $table = 'cuti_approval_workflow';
     protected $fillable = ['cuti_id', 'approval_level_id', 'status'];
 
+
     public function approvalLevel()
     {
         return $this->belongsTo(CutiApprovalLevel::class, 'approval_level_id');

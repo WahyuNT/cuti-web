@@ -22,8 +22,6 @@ class ManajemenApprovalLevelCuti extends Component
         $data = CutiApprovalLevel::orderBy('id', 'asc')
             ->get();
 
-
-
         $jabatanTypes = Jabatan::where('status', 'active')
             ->pluck('name', 'id')
             ->toArray();
@@ -47,7 +45,7 @@ class ManajemenApprovalLevelCuti extends Component
     {
 
         $this->validate([
-            'jabatan_id' => 'required|integer|unique:izin_approval_level_ref,jabatan_id',
+            'jabatan_id' => 'required|integer|unique:cuti_approval_level_ref,jabatan_id',
         ]);
 
         $data = [
@@ -80,7 +78,7 @@ class ManajemenApprovalLevelCuti extends Component
     {
 
         $this->validate([
-            'jabatan_id' => 'required|integer|unique:approval_level,jabatan_id,' . $this->editId,
+            'jabatan_id' => 'required|integer|unique:cuti_approval_level_ref,jabatan_id,' . $this->editId,
         ]);
         $data = [
             'jabatan_id' => $this->jabatan_id,

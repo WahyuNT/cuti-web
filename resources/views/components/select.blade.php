@@ -2,7 +2,7 @@
     'label' => '',
     'for' => '',
     'name' => '',
-    'mb' => '3',
+    'mb' => '0',
     'wire' => '',
     'wireType' => 'defer',
     'options' => [],
@@ -21,17 +21,15 @@
     @endif
 
     @php
-        $baseClass = 'bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5';
+        $baseClass =
+            'bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5';
         $mbClass = $mb ? ' mb-' . $mb : '';
         $finalClass = trim($baseClass . $mbClass);
     @endphp
 
-    <select
-        {{ $attributes->merge(['class' => $finalClass]) }}
-        id="{{ $for }}" name="{{ $name }}"
+    <select {{ $attributes->merge(['class' => $finalClass]) }} id="{{ $for }}" name="{{ $name }}"
         @if ($wire) wire:model.{{ $wireType }}="{{ $wire }}" @endif
-        @if ($required) required @endif
-    >
+        @if ($required) required @endif>
         <option value="">{{ $placeholder }}</option>
 
         @foreach ($options as $value => $text)
@@ -41,6 +39,6 @@
 
     @php $errorKey = $wire ?: $name; @endphp
     @error($errorKey)
-        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        <p class="text-red-500 text-xs mt-0">{{ $message }}</p>
     @enderror
 </div>

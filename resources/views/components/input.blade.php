@@ -24,10 +24,10 @@
         @if ($required) required @endif
         {{ $attributes->merge([
             'class' =>
-                'bg-gray-50 border border-gray-200 mb-3 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                'bg-gray-50 border border-gray-200 mb-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
         ]) }} />
 
     @error($wire)
-        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        <p class="text-red-500 text-xs mt-0">{{ $message }}</p>
     @enderror
 </div>

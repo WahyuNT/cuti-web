@@ -48,25 +48,17 @@ class PermohonanCuti extends Component
             })
             ->pluck('cuti_id')
             ->toArray();
-        $data = CutiApprovalWorkflow::with('cuti', 'approvalLevel')
-            ->wherehas('approvalLevel', function ($query) use ($user) {
+        $data = CutiApprovalWorkflow::with(['cuti.user', 'approvalLevel'])
+            ->whereHas('approvalLevel', function ($query) use ($user) {
                 $query->where('jabatan_id', $user->jabatan_id);
             })
-            ->when($this->status, function ($query) {
-                $query->where('status', $this->status);
-            })
-            ->when($this->tahun, function ($query) {
-                return $query->whereYear('cuti.created_at', $this->tahun);
-            })
-            ->when($this->cutiType, function ($query) {
-                return $query->where('cuti.cuti_type_id', $this->cutiType);
-            })
+            ->when($this->status, fn($q) => $q->where('status', $this->status))
+            ->when($this->tahun, fn($q) => $q->whereHas('cuti', fn($q2) => $q2->whereYear('created_at', $this->tahun)))
+            ->when($this->cutiType, fn($q) => $q->whereHas('cuti', fn($q2) => $q2->where('cuti_type_id', $this->cutiType)))
             ->when($this->filter, function ($query) {
-                $query->where(function ($subquery) {
-                    $subquery->where('cuti.alasan', 'like', '%' . $this->filter . '%')
-                        ->orWhereHas('cuti.user', function ($izinTypeQuery) {
-                            $izinTypeQuery->where('name', 'like', '%' . $this->filter . '%');
-                        });
+                $query->whereHas('cuti', function ($q2) {
+                    $q2->where('alasan', 'like', '%' . $this->filter . '%')
+                        ->orWhereHas('user', fn($q3) => $q3->where('name', 'like', '%' . $this->filter . '%'));
                 });
             })
             ->orderBy('cuti_id', 'desc')
@@ -190,10 +182,10 @@ class PermohonanCuti extends Component
                 $dataCurrent->save();
 
                 // aktifkan next approver kalau ada
-                if (isset($cutiApprovalWorkflow[$currentIndex + 1])) {
-                    $dataNextIndex = $cutiApprovalWorkflow[$currentIndex + 1];
-                    $dataNextIndex->status = 'pending';
-                    $dataNextIndex->save();
+                for ($i = $currentIndex + 1; $i < count($cutiApprovalWorkflow); $i++) {
+                    $dataNext = $cutiApprovalWorkflow[$i];
+                    $dataNext->status = 'pending';
+                    $dataNext->save();
                 }
 
                 $cuti = Cuti::find($id);

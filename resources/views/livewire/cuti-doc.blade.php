@@ -28,7 +28,7 @@
                 <td style="border: 0px solid transparent; padding: 5px; width: 50%; vertical-align: bottom;">
                     <div style="text-align: center; margin-bottom: 20px;">
                         <h3 style="margin: 5px 0; text-align: left;"><u>PERMINTAAN DAN PEMBERIAN CUTI</u></h3>
-                        <div style="text-align: left;">Nomor : {{ $data['no_surat'] }}</div>
+                        <div style="text-align: left;">Nomor : {{ $data['nomor_surat'] }}</div>
                     </div>
                 </td>
                 <td style="border: 0px solid transparent; padding: 5px; width: 25%; vertical-align: bottom;"></td>
@@ -219,10 +219,10 @@
                 <td style="border: 1px solid black; padding: 5px; width: 25%; vertical-align: top;"></td>
                 <td style="border: 1px solid black; padding: 5px; width: 25%; vertical-align: top;"></td>
                 <td style="border: 1px solid black; padding: 5px; width: 25%; vertical-align: top; text-align:center;">
-                    <div><strong>RONI SE</strong></div>
-                    <div style="margin-top: 60px;"><strong><u>RONI SE</u></strong></div>
-                    <div>Pangkat : Penata</div>
-                    <div>Nip. 198303262015031004</div>
+                    <div><strong>{{ $data->user->name }}</strong></div>
+                    <div style="margin-top: 60px;"><strong><u>{{ $data->user->name }}</u></strong></div>
+                    <div>Pangkat : {{ $data->user->pangkat }}</div>
+                    <div>Nip. {{ $data->user->nip }}</div>
                 </td>
             </tr>
         </table>
@@ -246,10 +246,10 @@
                 <td style="border: 1px solid black; padding: 5px; vertical-align: top;"></td>
                 <td style="border: 1px solid black; padding: 5px; vertical-align: bottom; text-align: right;">
                     <div style="text-align:center">
-                        <div>Kepala BPKAD</div>
-                        <div style="margin-top: 50px;"><strong><u>H. IRWAN IDRIS, S.Pi, M.Si</u></strong></div>
-                        <div style="font-size: 16px;">Pangkat : Pembina Utama Muda</div>
-                        <div style="font-size: 16px;">Nip.197011112003121006</div>
+                        <div>{{ $atasan1->jabatan->name }}</div>
+                        <div style="margin-top: 50px;"><strong><u>{{ $atasan1->name }}</u></strong></div>
+                        <div style="font-size: 16px;">Pangkat : {{ $atasan1->pangkatRef->name }}</div>
+                        <div style="font-size: 16px;">Nip.{{ $atasan1->nip }}</div>
                     </div>
                 </td>
             </tr>
@@ -276,10 +276,10 @@
                 <td style="border: 1px solid black; padding: 5px; vertical-align: bottom; text-align: right;">
                     <div style="text-align:center">
                         <div>a.n. Bupati Mamuju</div>
-                        <div>Sekretaris Daerah</div>
-                        <div style="margin-top: 50px;"><strong><u>H. SUAIB, S.Sos, MM</u></strong></div>
-                        <div style="font-size: 16px;">Pangkat : Pembina Utama Madya</div>
-                        <div style="font-size: 16px;">Nip.196610071987031011</div>
+                        <div>{{ $atasan2->jabatan->name }}</div>
+                        <div style="margin-top: 50px;"><strong><u>{{ $atasan2->name }}</u></strong></div>
+                        <div style="font-size: 16px;">Pangkat : {{ $atasan2->pangkatRef->name }}</div>
+                        <div style="font-size: 16px;">Nip.{{ $atasan2->nip }}</div>
                     </div>
                 </td>
             </tr>

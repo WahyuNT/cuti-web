@@ -26,6 +26,7 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'role',
         'jabatan_id',
+        'pangkat_id',
         'nomor_wa',
     ];
 
@@ -72,5 +73,9 @@ class User extends Authenticatable implements JWTSubject
     public function jabatan()
     {
         return $this->belongsTo(Jabatan::class, 'jabatan_id');
+    }
+    public function pangkatRef()
+    {
+        return $this->belongsTo(Pangkat::class, 'pangkat_id');
     }
 }

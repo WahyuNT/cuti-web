@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Jabatan;
+use App\Models\Pangkat;
 use App\Models\User;
 use App\Services\CrudService;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
@@ -19,7 +20,7 @@ class ManajemenUser extends Component
     public $editId = null;
     public $deleteId = null;
     public $filter = null;
-    public $name, $nip, $password, $role, $jabatan_id, $nomor_wa;
+    public $name, $nip, $password, $role, $jabatan_id, $pangkat_id, $nomor_wa;
 
 
     public function render()
@@ -31,6 +32,9 @@ class ManajemenUser extends Component
                     ->orWhere('nomor_wa', 'like', '%' . $this->filter . '%')
                     ->orwherehas('jabatan', function ($jabatan) {
                         $jabatan->where('name', 'like', '%' . $this->filter . '%');
+                    })
+                    ->orwherehas('pangkat', function ($pangkat) {
+                        $pangkat->where('name', 'like', '%' . $this->filter . '%');
                     });
             });
         })
@@ -40,7 +44,13 @@ class ManajemenUser extends Component
         $jabatanData = Jabatan::where('status', 'active')
             ->pluck('name', 'id')
             ->toArray();
-        return view('livewire.manajemen-user', compact('data', 'jabatanData'))->extends('layouts.master');
+
+        $pangkatData = Pangkat::where('status', 'active')
+            ->pluck('name', 'id')
+            ->toArray();
+
+
+        return view('livewire.manajemen-user', compact('data', 'jabatanData', 'pangkatData'))->extends('layouts.master');
     }
     public function toggleMode()
     {
@@ -51,7 +61,7 @@ class ManajemenUser extends Component
         $this->mode = 'view';
         $this->resetValidation();
         $this->editId = null;
-        $this->reset(['name', 'nip', 'password', 'role', 'jabatan_id', 'nomor_wa']);
+        $this->reset(['name', 'nip', 'password', 'role', 'jabatan_id', 'pangkat_id', 'nomor_wa']);
     }
     public function create(CrudService $crud)
     {
@@ -61,6 +71,7 @@ class ManajemenUser extends Component
             'password' => 'required|string|min:1',
             'role' => 'required',
             'jabatan_id' => 'required|integer',
+            'pangkat_id' => 'required|integer',
             'nomor_wa' => 'required|string|max:15',
         ]);
 
@@ -70,6 +81,7 @@ class ManajemenUser extends Component
             'password' => bcrypt($this->password),
             'role' => $this->role,
             'jabatan_id' => $this->jabatan_id,
+            'pangkat_id' => $this->pangkat_id,
             'nomor_wa' => $this->nomor_wa,
         ];
 
@@ -85,6 +97,7 @@ class ManajemenUser extends Component
             $this->nip = $user->nip;
             $this->role = $user->role;
             $this->jabatan_id = $user->jabatan_id;
+            $this->pangkat_id = $user->pangkat_id;
             $this->nomor_wa = $user->nomor_wa;
             $this->mode = 'edit';
             $this->editId = $id;
@@ -97,6 +110,7 @@ class ManajemenUser extends Component
             'nip' => 'required|string|max:20|unique:users,nip,' . $this->editId,
             'role' => 'required',
             'jabatan_id' => 'required|integer|max:100',
+            'pangkat_id' => 'required|integer|max:100',
             'nomor_wa' => 'required|string|max:15',
         ]);
 
@@ -105,6 +119,7 @@ class ManajemenUser extends Component
             'nip' => $this->nip,
             'role' => $this->role,
             'jabatan_id' => $this->jabatan_id,
+            'pangkat_id' => $this->pangkat_id,
             'nomor_wa' => $this->nomor_wa,
 
         ];

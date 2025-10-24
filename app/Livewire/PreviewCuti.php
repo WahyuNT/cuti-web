@@ -163,10 +163,10 @@ class PreviewCuti extends Component
                 $dataCurrent->save();
 
                 // aktifkan pending untuk next nya
-                if (isset($cutiApprovalWorkflow[$currentIndex + 1])) {
-                    $dataNextIndex = $cutiApprovalWorkflow[$currentIndex + 1];
-                    $dataNextIndex->status = 'pending';
-                    $dataNextIndex->save();
+                for ($i = $currentIndex + 1; $i < count($cutiApprovalWorkflow); $i++) {
+                    $dataNext = $cutiApprovalWorkflow[$i];
+                    $dataNext->status = 'pending';
+                    $dataNext->save();
                 }
 
                 $cuti = Cuti::find($id);
