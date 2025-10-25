@@ -10,27 +10,24 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CutiIzinCountService
 {
-    /**
-     * Show dynamic Livewire alert
-     */
-    public function CutiCount()
+    public function CutiCount(string $status)
     {
         $user = JWTAuth::parseToken()->authenticate();
         return CutiApprovalWorkflow::with(['cuti.user', 'approvalLevel'])
             ->whereHas('approvalLevel', function ($query) use ($user) {
                 $query->where('jabatan_id', $user->jabatan_id);
             })
-            ->where('status', 'waiting')
+            ->where('status', $status)
             ->count();
     }
-    public function IzinCount()
+    public function IzinCount(string $status)
     {
         $user = JWTAuth::parseToken()->authenticate();
         return IzinApprovalWorkflow::with(['izin.user', 'approvalLevel'])
             ->whereHas('approvalLevel', function ($query) use ($user) {
                 $query->where('jabatan_id', $user->jabatan_id);
             })
-            ->where('status', 'waiting')
+            ->where('status', $status)
             ->count();
     }
 }

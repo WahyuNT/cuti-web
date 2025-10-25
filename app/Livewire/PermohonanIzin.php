@@ -55,6 +55,7 @@ class PermohonanIzin extends Component
             ->when($this->status, function ($query) {
                 $query->where('status', $this->status);
             })
+            ->when(!$this->status, fn($q) => $q->where('status', '!=', 'pending'))
             ->when($this->tahun, function ($query) {
                 return $query->whereYear('izin.created_at', $this->tahun);
             })
@@ -73,7 +74,7 @@ class PermohonanIzin extends Component
             ->paginate(10);
 
 
-        return view('livewire.permohonan-izin', compact('data', 'tahunData', 'izinTypesData','user'))->extends('layouts.master');
+        return view('livewire.permohonan-izin', compact('data', 'tahunData', 'izinTypesData', 'user'))->extends('layouts.master');
     }
     public function approve($id)
     {

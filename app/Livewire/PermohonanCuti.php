@@ -53,6 +53,7 @@ class PermohonanCuti extends Component
                 $query->where('jabatan_id', $user->jabatan_id);
             })
             ->when($this->status, fn($q) => $q->where('status', $this->status))
+            ->when(!$this->status, fn($q) => $q->where('status', '!=', 'pending'))
             ->when($this->tahun, fn($q) => $q->whereHas('cuti', fn($q2) => $q2->whereYear('created_at', $this->tahun)))
             ->when($this->cutiType, fn($q) => $q->whereHas('cuti', fn($q2) => $q2->where('cuti_type_id', $this->cutiType)))
             ->when($this->filter, function ($query) {

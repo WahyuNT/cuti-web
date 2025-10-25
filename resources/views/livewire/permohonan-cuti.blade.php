@@ -77,7 +77,6 @@
                                     Ditolak
                                 @elseif($item->status === 'waiting')
                                     Menunggu Persetujuan Anda
-                                
                                 @endif
                             </span>
                         </td>

@@ -10,8 +10,8 @@ class Sidebar extends Component
     public function render()
     {
         $service = new CutiIzinCountService();
-        $izinCount = $service->IzinCount();
-        $cutiCount = $service->CutiCount();
+        $izinCount = $service->IzinCount('waiting');
+        $cutiCount = $service->CutiCount('waiting');
         return view('livewire.sidebar', compact('izinCount', 'cutiCount'));
     }
 }

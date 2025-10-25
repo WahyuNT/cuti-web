@@ -83,7 +83,6 @@
                         @endif
                     </a>
                 </li>
-
                 <li>
                     <a href="{{ route('permohonan-izin') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group {{ request()->routeIs('permohonan-izin') ? 'bg-gray-100' : '' }}">

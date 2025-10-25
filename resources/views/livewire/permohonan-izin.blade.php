@@ -66,11 +66,16 @@
                         <td class="px-6 py-4 text-sm text-gray-900">
                             <span
                                 class="px-3 py-1 rounded-full text-white text-xs font-semibold
-                                    @if ($item->izin->status === 'success') bg-[var(--success)]
-                                    @elseif($item->izin->status === 'failed')
-                                        bg-[var(--danger)]
-                                    @else
-                                        bg-[var(--warning)] @endif">{{ ucfirst($item->izin->status) }}
+                                    @if ($item->status === 'success') bg-[var(--success)]
+                                    @elseif ($item->status === 'failed') bg-[var(--danger)]
+                                    @else bg-[var(--warning)] @endif">
+                                @if ($item->status === 'success')
+                                    Diterima
+                                @elseif ($item->status === 'failed')
+                                    Ditolak
+                                @elseif($item->status === 'waiting')
+                                    Menunggu Persetujuan Anda
+                                @endif
                             </span>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-900 text-center">
@@ -80,7 +85,7 @@
                                     class="fa-solid fa-sitemap"></i></button>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-900">
-                         <a href="{{ route('preview-izin', $item->izin->id) }}">
+                            <a href="{{ route('preview-izin', $item->izin->id) }}">
                                 <x-button bg="[var(--primary)]" px="2" py="1.5"
                                     label='<i class="fa-solid fa-eye"></i> Detail' />
                             </a>

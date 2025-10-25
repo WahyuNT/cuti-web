@@ -6,6 +6,7 @@ use App\Models\Cuti;
 use App\Models\Izin;
 use App\Models\ViewCutiKuota;
 use App\Models\ViewCutiTahunan;
+use App\Services\CutiIzinCountService;
 use Livewire\Component;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -43,6 +44,17 @@ class Dashboard extends Component
         $IzinSuccess = Izin::where('status', 'success')->where('user_id', $user['id'])->count();
         $IzinFailed = Izin::where('status', 'failed')->where('user_id', $user['id'])->count();
 
-        return view('livewire.dashboard', compact('cuti_type', 'cutiTahunan', 'CutiPending', 'CutiSuccess', 'CutiFailed', 'CutiKetua', 'IzinPending', 'IzinSuccess', 'IzinFailed'))->extends('layouts.master');
+        $service = new CutiIzinCountService();
+        $permohonanIzinWaiting = $service->IzinCount('waiting');
+        $permohonanIzinSuccess = $service->IzinCount('success');
+        $permohonanIzinFailed = $service->IzinCount('failed');
+
+        $permohonanCutiWaiting = $service->CutiCount('waiting');
+        $permohonanCutiSuccess = $service->CutiCount('success');
+        $permohonanCutiFailed = $service->CutiCount('failed');
+
+
+
+        return view('livewire.dashboard', compact('cuti_type', 'cutiTahunan', 'CutiPending', 'CutiSuccess', 'CutiFailed', 'CutiKetua', 'IzinPending', 'IzinSuccess', 'IzinFailed', 'permohonanIzinWaiting', 'permohonanIzinSuccess', 'permohonanIzinFailed', 'permohonanCutiWaiting', 'permohonanCutiSuccess', 'permohonanCutiFailed'))->extends('layouts.master');
     }
 }
