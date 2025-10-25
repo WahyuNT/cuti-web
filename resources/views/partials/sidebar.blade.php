@@ -1,3 +1,3 @@
 <div class="div">
-@livewire('sidebar')
+    @livewire('sidebar')
 </div>

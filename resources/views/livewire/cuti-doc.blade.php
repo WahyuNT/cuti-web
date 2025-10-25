@@ -1,6 +1,27 @@
 @php
     $totalCutiTahunan = count($cutiTahunan);
 @endphp
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<style>
+    @font-face {
+        font-family: "DejaVu Sans";
+        /* path absolut ke file .ttf di server */
+        src: url("{{ storage_path('fonts/DejaVuSans.ttf') }}") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    .pdf-body {
+        font-family: "DejaVu Sans", sans-serif;
+    }
+
+    .centang {
+        font-family: "DejaVu Sans", sans-serif;
+        font-size: 14px;
+        line-height: 1;
+    }
+</style>
 <div>
     <div style="font-family: Arial, sans-serif; margin: 30px; font-size: 16px;">
         <div style="text-align: center; margin-bottom: 10px;">
@@ -87,8 +108,10 @@
                                 <td style="border:1px solid black; padding:5px;">
                                     {{ $loop->iteration * 2 - 1 }}. {{ $item->cuti->name ?? '-' }}
                                 </td>
-                                <td style="border:1px solid black; border-left:0; width:40px; text-align:center;">
-                                    {{ $data->cuti_type_id == $item->cuti_type_id ? '✓' : '' }}
+                                <td style="border:1px solid black; border-left:0; width:40px; text-align:center;"
+                                    class="centang">
+                                    {!! $data->cuti_type_id == $item->cuti_type_id ? '&#10003;' : '' !!}
+                                    {{-- &#10003; = ✓ --}}
                                 </td>
                             </tr>
                         @endforeach

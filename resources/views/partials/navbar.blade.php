@@ -5,14 +5,10 @@
     <nav class="bg-white  border-b border-gray-200 px-4 py-3.5">
         <div class="flex flex-wrap justify-between items-center">
             <div class="flex justify-start items-center">
-                <button id="toggleSidebar" aria-expanded="true" aria-controls="sidebar"
-                    class="hidden p-2 mr-3 text-gray-600 rounded cursor-pointer lg:inline hover:text-gray-900 hover:bg-gray-100">
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 16 12">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 1h14M1 6h14M1 11h7" />
-                    </svg>
-                </button>
+                <a href="/" class="flex gap-2 items-center">
+                    <img src="{{ asset('images/logo_kab_mamuju.png') }}" class="h-8" alt="">
+                    <h2 class="font-bold">SiapBPKAD Mamuju</h2>
+                </a>
 
                 <button aria-expanded="true" aria-controls="sidebar"
                     class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100">
@@ -26,10 +22,14 @@
 
             </div>
 
-            <p>
-                {{ $user->name }} '-' {{  $user->jabatan->name ?? '' }}
-            </p>
-            <div class="flex items-center lg:order-2 ">
+            <span
+                class="px-3 py-1 rounded-full text-gray-800 text-md bg-gray-100 border-2 border-gray-200   font-semibold ">
+                {{ $user->name }}
+            </span>
+
+
+            <div class="flex
+                items-center lg:order-2 ">
                 <button type="button "
                     class="flex mx-3  text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300"
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
@@ -39,8 +39,8 @@
                         @csrf
 
                         <button
-                            class="block bg-[var(--danger)] rounded-full py-1 text-white px-2 w-full text-sm hover:bg-red-900 hover:cursor-pointer">Sign
-                            out</butt>
+                            class="block bg-[var(--danger)] rounded-full py-1 text-white px-2 w-full text-sm hover:bg-red-900 hover:cursor-pointer">Keluar
+                            </butt>
 
                     </form>
                 </button>
