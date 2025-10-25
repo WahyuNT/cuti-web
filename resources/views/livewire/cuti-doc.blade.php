@@ -216,7 +216,17 @@
                 <td style="border: 1px solid black; padding: 5px; width: 25%; vertical-align: top;"></td>
                 <td style="border: 1px solid black; padding: 5px; width: 25%; vertical-align: top; text-align:center;">
                     <div><strong>{{ $data->user->name }}</strong></div>
-                    <div style="margin-top: 60px;"><strong><u>{{ $data->user->name }}</u></strong></div>
+                    <div style="text-align:center ;margin-top:5px; margin-bottom:5px">
+                        @if ($isPrint == 'true')
+                            <img style="width: 90px; height:90px" alt=""
+                                src="data:image/png;base64, {!! $qrUser !!}">
+                        @else
+                            <div style="display:flex; justify-content:center; align-items:center; height:90px;">
+                                {!! QrCode::format('svg')->size(90)->errorCorrection('H')->generate($data->user->name) !!}
+                            </div>
+                        @endif
+                    </div>
+                    <div style=""><strong><u>{{ $data->user->name }}</u></strong></div>
                     <div>Pangkat : {{ $data->user->pangkat }}</div>
                     <div>Nip. {{ $data->user->nip }}</div>
                 </td>
@@ -240,11 +250,19 @@
                 <td style="border: 1px solid black; padding: 5px; height: 100px; vertical-align: top;"></td>
                 <td style="border: 1px solid black; padding: 5px; vertical-align: top;"></td>
                 <td style="border: 1px solid black; padding: 5px; vertical-align: top;"></td>
-                <td style="border: 1px solid black; padding: 5px; vertical-align: bottom; text-align: right;">
-                    <div style="text-align:center">
+                <td style="border: 1px solid black; padding: 5px; vertical-align: bottom; text-align: right;  ">
+                    <div style="text-align:center; ">
                         <div>{{ $atasan1->jabatan->name }}</div>
-                        <div style="text-align:center">
-                            {!! QrCode::generate($atasan1->name); !!}
+                        <div style="text-align:center;margin-top:5px; margin-bottom:5px">
+
+                            @if ($isPrint == 'true')
+                                <img style="width: 90px; height:90px" alt=""
+                                    src="data:image/png;base64, {!! $qrAtasan1 !!}">
+                            @else
+                                <div style="display:flex; justify-content:center; align-items:center; height:90px;">
+                                    {!! QrCode::format('svg')->size(90)->errorCorrection('H')->generate($atasan2->name) !!}
+                                </div>
+                            @endif
                         </div>
                         <div style=""><strong><u>{{ $atasan1->name }}</u></strong></div>
                         <div style="font-size: 16px;">Pangkat : {{ $atasan1->pangkatRef->name }}</div>
@@ -276,8 +294,15 @@
                     <div style="text-align:center">
                         <div>a.n. Bupati Mamuju</div>
                         <div>{{ $atasan2->jabatan->name }}</div>
-                          <div style="text-align:center">
-                            {!! QrCode::generate($atasan2->name); !!}
+                        <div style="text-align:center ;margin-top:5px; margin-bottom:5px">
+                            @if ($isPrint == 'true')
+                                <img style="width: 90px; height:90px" alt=""
+                                    src="data:image/png;base64, {!! $qrAtasan1 !!}">
+                            @else
+                                <div style="display:flex; justify-content:center; align-items:center; height:90px;">
+                                    {!! QrCode::format('svg')->size(90)->errorCorrection('H')->generate($atasan1->name) !!}
+                                </div>
+                            @endif
                         </div>
                         <div style=""><strong><u>{{ $atasan2->name }}</u></strong></div>
                         <div style="font-size: 16px;">Pangkat : {{ $atasan2->pangkatRef->name }}</div>

@@ -9,6 +9,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class RiwayatIzin extends Component
 {
@@ -75,8 +76,9 @@ class RiwayatIzin extends Component
     public function downloadPdf($id)
     {
         $data = Izin::find($id);
-
-        $html = view('livewire.izin-doc', ['data' => $data])->render();
+        $qrcode = base64_encode(QrCode::format('svg')->size(200)->errorCorrection('H')->generate($data->user->name));
+        $isPrint = 'true';
+        $html = view('livewire.izin-doc', ['data' => $data, 'qrcode' => $qrcode, 'isPrint' => $isPrint])->render();
 
         $pdf = Pdf::loadHTML($html)->setPaper('a4', 'portrait');
 

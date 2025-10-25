@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Izin;
 use Livewire\Component;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class IzinDoc extends Component
 {
@@ -16,8 +17,12 @@ class IzinDoc extends Component
     public function render()
     {
         $data = Izin::find($this->id);
+        $qrcode = base64_encode(QrCode::format('svg')->size(200)->errorCorrection('H')->generate($data->user->name));
+        $isPrint = 'false';
         return view('livewire.izin-doc', compact(
-            'data'
+            'data',
+            'qrcode',
+            'isPrint'
         ));
     }
 }

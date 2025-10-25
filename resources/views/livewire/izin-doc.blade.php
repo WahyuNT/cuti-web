@@ -103,9 +103,16 @@
                 </td>
                 <td style="width: 40%; border: 1px solid black; padding: 5px; text-align: left; border:0px transparent">
                     <div style="margin-top: 0; text-align: left; font-size: 14px;">
-                        <p style="margin: 5px 0;">Mamuju, 8 September 2025</p>
+                        <p style="margin: 5px 0;">Mamuju,
+                            {{ \Carbon\Carbon::parse($data->updated_at)->locale('id')->isoFormat('D MMMM YYYY') }}
+                        </p>
                         <p style="margin: 5px 0;">{{ $data->user->jabatan->name }},</p>
-                        <p style="margin: 5px 0; font-weight: bold;">{!! QrCode::generate($data->user->name); !!}</p>
+                        @if ($isPrint == true)
+                            <img style="width: 90px; heigh:90px" alt=""
+                                src="data:image/png;base64, {!! $qrcode !!}">
+                        @else
+                            {!! QrCode::format('svg')->size(90)->errorCorrection('H')->generate($data->user->name) !!}
+                        @endif
                         <p style="margin: 5px 0; font-weight: bold;">{{ $data->user->name }}</p>
                         <p style="margin: 5px 0;">Pangkat : {{ $data->user->pangkatRef->name }}</p>
                         <p style="margin: 5px 0;">NIP.{{ $data->user->nip }}</p>

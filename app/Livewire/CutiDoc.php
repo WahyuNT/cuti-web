@@ -83,9 +83,13 @@ class CutiDoc extends Component
         // $qrAtasan2 = base64_encode(
         //     QrCode::format('png')->size(100)->generate($atasan2->name)
         // );
+        $qrUser = base64_encode(QrCode::format('svg')->size(200)->errorCorrection('H')->generate($data->user->name));
+        $qrAtasan1 = base64_encode(QrCode::format('svg')->size(200)->errorCorrection('H')->generate($atasan1->name));
+        $qrAtasan2 = base64_encode(QrCode::format('svg')->size(200)->errorCorrection('H')->generate($atasan2->name));
 
+        $isPrint = 'false';
 
-        return view('livewire.cuti-doc', compact('data', 'atasan1', 'atasan2', 'cutiData', 'leftItems', 'rightItems', 'tanggalCuti', 'cutiTahunan', 'cuti_type'));
+        return view('livewire.cuti-doc', compact('data', 'atasan1', 'atasan2', 'cutiData', 'leftItems', 'rightItems', 'tanggalCuti', 'cutiTahunan', 'cuti_type',  'qrUser', 'qrAtasan1', 'qrAtasan2', 'isPrint'));
     }
 
     private function splitCutiData($cutiData)
