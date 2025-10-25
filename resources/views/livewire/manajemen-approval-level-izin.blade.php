@@ -9,7 +9,7 @@
         {{ count($data) > 1 ? 'divide-x divide-gray-100 border border-gray-100' : 'border-0 divide-x-0' }}">
 
                 @forelse ($data as $item)
-                    <li class="relative flex items-center justify-center gap-2 p-4 odd:bg-gray-100 even:bg-gray-200">
+                    <li class="relative  justify-center gap-2 p-4 odd:bg-gray-100 even:bg-gray-200">
 
                         {{-- Panah kiri (bukan item pertama) → ikut warna sebelumnya --}}
                         @if (!$loop->first)
@@ -40,7 +40,7 @@
                                     <h3 class="font-semibold text-lg">{{ $item->jabatan->name }}</h3>
                                 </div>
 
-                                <div class="flex gap-1">
+                                <div class="flex gap-1 ">
                                     @if ($deleteId != $item->id)
                                         <x-button wire:click="edit({{ $item->id }})" bg="[var(--warning)]"
                                             px="1" py="0.5"
@@ -70,11 +70,18 @@
                                     <x-select label="Pilih Jabatan" for="jabatan_id" wire="jabatan_id" :options="$jabatanTypes"
                                         :required="true" />
                                 </div>
-                                <div class="flex items-center gap-2">
+                                <div class="div">
+                                    <x-select label="Tanda Tangan" for="is_sign" wire="is_sign" :options="[
+                                        'true' => 'Ya',
+                                        'false' => 'Tidak',
+                                    ]"
+                                        :required="true" />
+                                </div>
+                                <div class="flex items-center gap-2 mt-1">
                                     <x-button wire:click="resetInput({{ $item->id }})" bg="[var(--danger)]"
-                                        px="1" py="1" label='<i class="fa-solid fa-sm fa-x"></i>' />
+                                        px="1.5" py="1" label='<i class="fa-solid fa-sm fa-x"></i>' />
                                     <x-button wire:click="update({{ $item->id }})" bg="[var(--success)]"
-                                        px="1" py="1" label='<i class="fa-solid fa-sm fa-check"></i>' />
+                                        px="1.5" py="1" label='<i class="fa-solid fa-sm fa-check"></i>' />
                                 </div>
                             </div>
                         @endif
@@ -82,15 +89,15 @@
                     </li>
 
                 @empty
-       
+
                 @endforelse
                 @if ($mode == 'create')
                     <div class="px-3 w-auto items-center justify-between">
                         <div class="flex items-end gap-2">
                             <x-select label="Pilih Jabatan" mb="0" for="jabatan_id" wire="jabatan_id"
                                 type="change" :options="$jabatanTypes" :required="true" />
-                            <x-button wire:click="resetInput" bg="[var(--danger)]" px="1"
-                                py="1" label='<i class="fa-solid  fa-x"></i>' />
+                            <x-button wire:click="resetInput" bg="[var(--danger)]" px="1" py="1"
+                                label='<i class="fa-solid  fa-x"></i>' />
                             <x-button wire:click="create" bg="[var(--success)]" px="1" py="1"
                                 label='<i class="fa-solid  fa-check"></i>' />
                         </div>
@@ -99,7 +106,7 @@
             </ol>
             @if ($mode == 'view')
                 {{-- Tombol tambah --}}
-                <div class="mt-3">
+                <div class="">
                     <x-button wire:click="toggleMode" bg="[var(--success)]" px="1" py="1"
                         label='<i class="fa-solid fa-lg fa-plus"></i>' />
                 </div>

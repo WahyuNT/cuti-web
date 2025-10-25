@@ -9,7 +9,7 @@ class IzinApprovalLevel extends Model
 {
     use HasFactory;
     protected $table = 'izin_approval_level_ref';
-    protected $fillable = ['jabatan_id'];
+    protected $fillable = ['jabatan_id','is_sign'];
 
     public function jabatan()
     {

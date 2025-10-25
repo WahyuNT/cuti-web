@@ -14,7 +14,7 @@ class ManajemenApprovalLevelCuti extends Component
     public $mode = 'view';
     public $editId = null;
     public $deleteId = null;
-    public $jabatan_id;
+    public $jabatan_id, $is_sign;
 
 
     public function render()
@@ -39,17 +39,19 @@ class ManajemenApprovalLevelCuti extends Component
         $this->mode = 'view';
         $this->editId = null;
         $this->resetValidation();
-        $this->reset(['jabatan_id']);
+        $this->reset(['jabatan_id','is_sign']);
     }
     public function create(CrudService $crud)
     {
 
         $this->validate([
             'jabatan_id' => 'required|integer|unique:cuti_approval_level_ref,jabatan_id',
+            'is_sign' => 'required',
         ]);
 
         $data = [
             'jabatan_id' => $this->jabatan_id,
+            'is_sign' => $this->is_sign
         ];
 
         if ($this->getCutiStatusPending() == 0) {
@@ -70,6 +72,7 @@ class ManajemenApprovalLevelCuti extends Component
 
         if ($data) {
             $this->jabatan_id = $data->jabatan_id;
+            $this->is_sign = $data->is_sign;
             $this->mode = 'edit';
             $this->editId = $id;
         }
@@ -79,9 +82,11 @@ class ManajemenApprovalLevelCuti extends Component
 
         $this->validate([
             'jabatan_id' => 'required|integer|unique:cuti_approval_level_ref,jabatan_id,' . $this->editId,
+            'is_sign' => 'required',
         ]);
         $data = [
             'jabatan_id' => $this->jabatan_id,
+            'is_sign' => $this->is_sign
         ];
 
 

@@ -62,11 +62,18 @@
                         <td class="px-6 py-4 text-sm text-gray-900">
                             <span
                                 class="px-3 py-1 rounded-full text-white text-xs font-semibold
-                                    @if ($item->status === 'success') bg-[var(--info)]
-                                    @elseif($item->status === 'failed')
-                                        bg-[var(--danger)]
-                                    @else
-                                        bg-[var(--warning)] @endif">{{ ucfirst($item->status) }}
+        @if ($item->status === 'success') bg-[var(--success)]
+        @elseif($item->status === 'failed')
+            bg-[var(--danger)]
+        @else
+            bg-[var(--warning)] @endif">
+                                @if ($item->status === 'success')
+                                    Diterima
+                                @elseif($item->status === 'failed')
+                                    Ditolak
+                                @else
+                                    Menunggu
+                                @endif
                             </span>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-900">

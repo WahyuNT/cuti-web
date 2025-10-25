@@ -46,7 +46,7 @@
                                     <td class="px-6 py-4">{{ $item->nip ?? '-' }}</td>
                                     <td class="px-6 py-4">{{ $item->role ?? '-' }}</td>
                                     <td class="px-6 py-4">{{ $item->jabatan->name ?? '-' }}</td>
-                                    <td class="px-6 py-4">{{ $item->pangkat->name ?? '-' }}</td>
+                                    <td class="px-6 py-4">{{ $item->pangkatRef->name ?? '-' }}</td>
                                     <td class="px-6 py-4">{{ $item->nomor_wa ?? '-' }}</td>
                                     <td class="text-center justify-center">
                                         <a href="{{ route('manajemen-cuti-user', ['id' => $item->id]) }}">
