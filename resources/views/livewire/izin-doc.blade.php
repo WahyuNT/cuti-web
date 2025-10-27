@@ -5,8 +5,13 @@
 
                 <!-- Kiri (25%) -->
                 <div style="width: 10%; text-align: left;">
-                    <img src="{{ asset('images/logo_kab_mamuju.png') }}" alt="Logo Mamuju"
-                        style="width: 80px; height: auto;">
+                    @if ($isPrint == 'true')
+                        <img src="data:image/png;base64,{{ $logoData }}" alt="logo"
+                            style="width:80px; height:auto;">
+                    @else
+                        <img src="{{ asset('images/logo_kab_mamuju.png') }}" alt=""
+                            style="width: 80px; height: auto;">
+                    @endif
                 </div>
 
                 <!-- Tengah (50%) -->

@@ -77,9 +77,10 @@ class RiwayatIzin extends Component
     {
         $data = Izin::find($id);
         $qrcode = base64_encode(QrCode::format('svg')->size(200)->errorCorrection('H')->generate($data->user->name));
+        $logoPath = public_path('images/logo_kab_mamuju.png');
+        $logoData = base64_encode(file_get_contents($logoPath));
         $isPrint = 'true';
-        $html = view('livewire.izin-doc', ['data' => $data, 'qrcode' => $qrcode, 'isPrint' => $isPrint])->render();
-
+        $html = view('livewire.izin-doc', ['data' => $data, 'qrcode' => $qrcode, 'isPrint' => $isPrint, 'logoData' => $logoData])->render();
         $pdf = Pdf::loadHTML($html)->setPaper('a4', 'portrait');
 
         return response()->streamDownload(function () use ($pdf) {

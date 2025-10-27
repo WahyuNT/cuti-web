@@ -19,10 +19,12 @@ class IzinDoc extends Component
         $data = Izin::find($this->id);
         $qrcode = base64_encode(QrCode::format('svg')->size(200)->errorCorrection('H')->generate($data->user->name));
         $isPrint = 'false';
+        
         return view('livewire.izin-doc', compact(
             'data',
             'qrcode',
-            'isPrint'
+            'isPrint',
+            'logoData'
         ));
     }
 }

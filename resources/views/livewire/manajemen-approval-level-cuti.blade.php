@@ -95,13 +95,24 @@
                 @endforelse
                 @if ($mode == 'create')
                     <div class="px-3 w-auto items-center justify-between">
-                        <div class="flex items-end gap-2">
-                            <x-select label="Pilih Jabatan" mb="0" for="jabatan_id" wire="jabatan_id"
-                                type="change" :options="$jabatanTypes" :required="true" />
-                            <x-button wire:click="resetInput()" bg="[var(--danger)]" px="1" py="1"
-                                label='<i class="fa-solid  fa-x"></i>' />
-                            <x-button wire:click="create" bg="[var(--success)]" px="1" py="1"
-                                label='<i class="fa-solid  fa-check"></i>' />
+                        <div class="flex-col items-center gap-2">
+                            <div class="">
+                                <x-select label="Pilih Jabatan" for="jabatan_id" wire="jabatan_id" :options="$jabatanTypes"
+                                    :required="true" />
+                            </div>
+                            <div class="div">
+                                <x-select label="Tanda Tangan" for="is_sign" wire="is_sign" :options="[
+                                    'true' => 'Ya',
+                                    'false' => 'Tidak',
+                                ]"
+                                    :required="true" />
+                            </div>
+                            <div class="flex items-center gap-2 mt-2">
+                                <x-button wire:click="resetInput()" bg="[var(--danger)]" px="1" py="1"
+                                    label='<i class="fa-solid  fa-x"></i>' />
+                                <x-button wire:click="create" bg="[var(--success)]" px="1" py="1"
+                                    label='<i class="fa-solid  fa-check"></i>' />
+                            </div>
                         </div>
                     </div>
                 @endif
