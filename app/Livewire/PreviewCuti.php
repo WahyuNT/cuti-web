@@ -35,6 +35,7 @@ class PreviewCuti extends Component
 
     public function render()
     {
+
         $cutiFlow = CutiApprovalWorkflow::where('cuti_id', $this->id)->get();
 
         $cutiFlowNow = CutiApprovalWorkflow::where('cuti_id', $this->id)

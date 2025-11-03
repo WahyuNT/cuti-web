@@ -52,7 +52,7 @@
                 <td style="border: 0px solid transparent; padding: 5px; width: 50%; vertical-align: bottom;">
                     <div style="text-align: center; margin-bottom: 20px;">
                         <h3 style="margin: 5px 0; text-align: left;"><u>PERMINTAAN DAN PEMBERIAN CUTI</u></h3>
-                        <div style="text-align: left;">Nomor : {{ $data['nomor_surat'] }}</div>
+                        <div style="text-align: left;">Nomor : {{ $data['nomor_surat'] ?? '-' }}</div>
                     </div>
                 </td>
                 <td style="border: 0px solid transparent; padding: 5px; width: 25%; vertical-align: bottom;"></td>
@@ -69,14 +69,14 @@
             <tr>
                 <td style="border: 1px solid black; padding: 5px; width: 15%;">Nama</td>
                 <td style="border: 1px solid black; padding: 5px; width: 35%;">
-                    <strong>{{ $data['user']['name'] }}</strong>
+                    <strong>{{ $data['user']['name'] ?? '-' }}</strong>
                 </td>
                 <td style="border: 1px solid black; padding: 5px; width: 15%;">NIP</td>
-                <td style="border: 1px solid black; padding: 5px; width: 35%;">{{ $data['user']['nip'] }}</td>
+                <td style="border: 1px solid black; padding: 5px; width: 35%;">{{ $data['user']['nip'] ?? '-' }}</td>
             </tr>
             <tr>
                 <td style="border: 1px solid black; padding: 5px;">Jabatan</td>
-                <td style="border: 1px solid black; padding: 5px;">{{ $data['user']['jabatan']['name'] }}</td>
+                <td style="border: 1px solid black; padding: 5px;">{{ $data['user']['jabatan']['name'] ?? '-' }}</td>
                 <td style="border: 1px solid black; padding: 5px;">Masa Kerja</td>
                 <td style="border: 1px solid black; padding: 5px;"></td>
             </tr>
@@ -143,7 +143,7 @@
                         CUTI</strong></td>
             </tr>
             <tr>
-                <td style="border: 1px solid black; padding: 5px;">{{ $data['alasan'] }}</td>
+                <td style="border: 1px solid black; padding: 5px;">{{ $data['alasan'] ?? '-' }}</td>
             </tr>
         </table>
 
@@ -154,8 +154,8 @@
                         CUTI</strong></td>
             </tr>
             <tr>
-                <td style="border: 1px solid black; padding: 5px;">{{ $tanggalCuti['jumlah'] }} Hari kerja, Mulai
-                    tanggal {{ $tanggalCuti['terkecil'] }} s/d {{ $tanggalCuti['terbesar'] }}</td>
+                <td style="border: 1px solid black; padding: 5px;">{{ $tanggalCuti['jumlah'] ?? '-' }} Hari kerja, Mulai
+                    tanggal {{ $tanggalCuti['terkecil'] }} s/d {{ $tanggalCuti['terbesar'] ?? '-'  }}</td>
             </tr>
         </table>
 
@@ -191,9 +191,9 @@
                                 </td>
                                 <td style="border:1px solid black; padding:5px;">
                                     @if ($loop->last)
-                                        {{ $item->sisa_kuota }}
+                                        {{ $item->sisa_kuota ?? '-' }}
                                     @else
-                                        {{ $item->sisa_cuti_tersimpan }}
+                                        {{ $item->sisa_cuti_tersimpan ?? '-'}}
                                     @endif
                                 </td>
                                 <td style="border:1px solid black; padding:5px; border-right:1px solid black;"></td>
@@ -209,10 +209,10 @@
                                 <td
                                     style="border:1px solid black;{{ $loop->iteration > 5 ? 'border-left:1px solid black; ' : ' border-left:0;' }} solid black; padding:5px;">
                                     {{ $loop->iteration + 1 }}.
-                                    {{ $item->cuti_type }}</td>
+                                    {{ $item->cuti_type ?? '-' }}</td>
                                 <td
                                     style="border:1px solid black; border-left:1px solid black; border-bottom:1px solid black; width:70px; text-align:center;">
-                                    {{ $item->sisa_kuota }}
+                                    {{ $item->sisa_kuota ?? '-' }}
                                 </td>
                             </tr>
                         @empty
@@ -238,20 +238,20 @@
                 <td style="border: 1px solid black; padding: 5px; width: 25%; vertical-align: top;"></td>
                 <td style="border: 1px solid black; padding: 5px; width: 25%; vertical-align: top;"></td>
                 <td style="border: 1px solid black; padding: 5px; width: 25%; vertical-align: top; text-align:center;">
-                    <div><strong>{{ $data->user->name }}</strong></div>
+                    <div><strong>{{ $data->user->name ?? '-' }}</strong></div>
                     <div style="text-align:center ;margin-top:5px; margin-bottom:5px">
                         @if ($isPrint == 'true')
                             <img style="width: 90px; height:90px" alt=""
                                 src="data:image/png;base64, {!! $qrUser !!}">
                         @else
                             <div style="display:flex; justify-content:center; align-items:center; height:90px;">
-                                {!! QrCode::format('svg')->size(90)->errorCorrection('H')->generate($data->user->name) !!}
+                                {!! QrCode::format('svg')->size(90)->errorCorrection('H')->generate($data->user->name ?? '-') !!}
                             </div>
                         @endif
                     </div>
-                    <div style=""><strong><u>{{ $data->user->name }}</u></strong></div>
-                    <div>Pangkat : {{ $data->user->pangkat }}</div>
-                    <div>Nip. {{ $data->user->nip }}</div>
+                    <div style=""><strong><u>{{ $data->user->name  ?? '-' }}</u></strong></div>
+                    <div>Pangkat : {{ $data->user->pangkat ?? '-' }}</div>
+                    <div>Nip. {{ $data->user->nip ?? '-' }}</div>
                 </td>
             </tr>
         </table>
@@ -275,7 +275,7 @@
                 <td style="border: 1px solid black; padding: 5px; vertical-align: top;"></td>
                 <td style="border: 1px solid black; padding: 5px; vertical-align: bottom; text-align: right;  ">
                     <div style="text-align:center; ">
-                        <div>{{ $atasan1->jabatan->name }}</div>
+                        <div>{{ $atasan1->jabatan->name ?? '-' }}</div>
                         <div style="text-align:center;margin-top:5px; margin-bottom:5px">
 
                             @if ($isPrint == 'true')
@@ -283,13 +283,13 @@
                                     src="data:image/png;base64, {!! $qrAtasan1 !!}">
                             @else
                                 <div style="display:flex; justify-content:center; align-items:center; height:90px;">
-                                    {!! QrCode::format('svg')->size(90)->errorCorrection('H')->generate($atasan2->name) !!}
+                                    {!! QrCode::format('svg')->size(90)->errorCorrection('H')->generate($atasan2->name ?? '-') !!}
                                 </div>
                             @endif
                         </div>
-                        <div style=""><strong><u>{{ $atasan1->name }}</u></strong></div>
-                        <div style="font-size: 16px;">Pangkat : {{ $atasan1->pangkatRef->name }}</div>
-                        <div style="font-size: 16px;">Nip.{{ $atasan1->nip }}</div>
+                        <div style=""><strong><u>{{ $atasan1->name ?? '-' }}</u></strong></div>
+                        <div style="font-size: 16px;">Pangkat : {{ $atasan1->pangkatRef->name ?? '-' }}</div>
+                        <div style="font-size: 16px;">Nip.{{ $atasan1->nip ?? '-' }}</div>
                     </div>
                 </td>
             </tr>
@@ -316,20 +316,20 @@
                 <td style="border: 1px solid black; padding: 5px; vertical-align: bottom; text-align: right;">
                     <div style="text-align:center">
                         <div>a.n. Bupati Mamuju</div>
-                        <div>{{ $atasan2->jabatan->name }}</div>
+                        <div>{{ $atasan2->jabatan->name ?? '-' }}</div>
                         <div style="text-align:center ;margin-top:5px; margin-bottom:5px">
                             @if ($isPrint == 'true')
                                 <img style="width: 90px; height:90px" alt=""
                                     src="data:image/png;base64, {!! $qrAtasan1 !!}">
                             @else
                                 <div style="display:flex; justify-content:center; align-items:center; height:90px;">
-                                    {!! QrCode::format('svg')->size(90)->errorCorrection('H')->generate($atasan1->name) !!}
+                                    {!! QrCode::format('svg')->size(90)->errorCorrection('H')->generate($atasan1->name  ?? '-') !!}
                                 </div>
                             @endif
                         </div>
-                        <div style=""><strong><u>{{ $atasan2->name }}</u></strong></div>
-                        <div style="font-size: 16px;">Pangkat : {{ $atasan2->pangkatRef->name }}</div>
-                        <div style="font-size: 16px;">Nip.{{ $atasan2->nip }}</div>
+                        <div style=""><strong><u>{{ $atasan2->name  ?? '-' }}</u></strong></div>
+                        <div style="font-size: 16px;">Pangkat : {{ $atasan2->pangkatRef->name  ?? '-' }}</div>
+                        <div style="font-size: 16px;">Nip.{{ $atasan2->nip  ?? '-' }}</div>
                     </div>
                 </td>
             </tr>

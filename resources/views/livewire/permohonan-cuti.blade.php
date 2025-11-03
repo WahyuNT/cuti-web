@@ -143,10 +143,10 @@
                 <div class="p-4 md:p-5 space-y-4">
                     <!-- component -->
                     <div class="w-full py-6">
-                        <div class="flex items-center">
+                        <div class="flex ">
                             @if ($flowData)
                                 @forelse ($flowData as $index => $item)
-                                    <div class="flex-1">
+                                    <div class="flex-1 ">
                                         <div class="relative mb-2">
                                             {{-- Garis penghubung antar step --}}
                                             @if ($index > 0)
@@ -184,24 +184,26 @@
                                                 </span>
                                             </div>
                                         </div>
-
                                         {{-- Label di bawah icon --}}
                                         <div class="text-xs text-center md:text-base">
                                             <div class="flex flex-col items-center justify-center">
                                                 <div>
-                                                    {{ $item->approvalLevel->jabatan->name ?? 'Unknown' }}
-                                                    @if ($item->approvalLevel->jabatan->id == $user->jabatan_id)
-                                                        <span
-                                                            class="px-1 py-0.5 ms-1 text-[10px] leading-none rounded-full text-white font-medium bg-[var(--warning)]">
-                                                            Anda
-                                                        </span>
-                                                    @endif
+                                                    {{ $item->approvalLevel->jabatan->name ?? '' }}
+
                                                 </div>
                                                 <div class="text-gray-500 text-[10px] md:text-xs mt-0">
                                                     @if ($item->updated_at && $item->updated_at != $item->created_at)
                                                         {{ $item->updated_at->locale('id')->translatedFormat('d M Y H:i') }}
                                                     @else
                                                         -
+                                                    @endif
+                                                </div>
+                                                <div class="div">
+                                                    @if ($item->approvalLevel->jabatan->id == $user->jabatan_id)
+                                                        <span
+                                                            class="px-1 py-0.5 ms-1 text-[10px] leading-none rounded-full text-white font-medium bg-[var(--warning)]">
+                                                            Anda
+                                                        </span>
                                                     @endif
                                                 </div>
                                             </div>

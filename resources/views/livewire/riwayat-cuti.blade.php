@@ -133,7 +133,7 @@
                 <div class="p-4 md:p-5 space-y-4">
                     <!-- component -->
                     <div class="w-full py-6">
-                        <div class="flex items-center">
+                        <div class="flex ">
                             @if ($flowData)
                                 @forelse ($flowData as $index => $item)
                                     <div class="flex-1">

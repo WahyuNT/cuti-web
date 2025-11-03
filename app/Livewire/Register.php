@@ -5,7 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use Illuminate\Http\Client\Request;
 use Livewire\Component;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
 class Register extends Component
 {
@@ -40,14 +40,18 @@ class Register extends Component
 
 
         if ($user->save()) {
-            $this->alert('success', 'Register Berhasil', [
-                'position' => 'center'
-            ]);
+            LivewireAlert::title('Register Berhasil')
+                ->position('top-end')
+                ->toast()
+                ->success()
+                ->show();
             return redirect()->route('login');
         } else {
-            $this->alert('error', 'Regiser Gagal', [
-                'position' => 'center'
-            ]);
+            LivewireAlert::title('Register Gagal')
+                ->position('top-end')
+                ->toast()
+                ->error()
+                ->show();
         }
     }
 }

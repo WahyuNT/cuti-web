@@ -1,8 +1,7 @@
 <div class="flex justify-between mb-3">
     <div class="w-3/4 pe-3 flex justify-start">
         <a href="{{ route('permohonan-cuti') }}" class="me-3">
-            <x-button bg="[var(--primary)]" px="1.5" py="1.5"
-                label='<i class="fa-solid fa-arrow-left"></i>' />
+            <x-button bg="[var(--primary)]" px="1.5" py="1.5" label='<i class="fa-solid fa-arrow-left"></i>' />
 
         </a>
         <div class=" rounded-xl w-full p-4 bg-white  max-w-4xl">

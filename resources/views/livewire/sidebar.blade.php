@@ -64,7 +64,7 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Riwayat Cuti</span>
                     </a>
                 </li>
-                @if ($user->role == 'ADMIN')
+                @if ($user->role == 'ADMIN' || $user->role == 'SUPERADMIN')
                     <li class="px-2 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                         Atasan
                     </li>

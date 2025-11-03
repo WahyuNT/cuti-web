@@ -4,11 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon-mamuju.png') }}" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>@yield('title', 'Login | SiapBPKAD Mamuju')</title>
     @stack('styles') {{-- buat custom CSS per page --}}
     @livewireStyles
 </head>
@@ -24,14 +26,13 @@
             <div class="mx-auto w-full max-w-md md:max-w-lg lg:max-w-sm">
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
                     <div class="p-8">
-                        <a href="./index.html" class="block text-center mb-4">
-                            <img src="{{ asset('images/logos/ptay logo.png') }}" alt="logo"
-                                class="mx-auto w-24 h-auto" />
-                        </a>
+                        <img src="{{ asset('images/logo_kab_mamuju.png') }}" alt="logo"
+                            class="mx-auto w-24 h-auto" />
 
-                        <h4 class="text-center text-2xl font-extrabold tracking-tight">SIAP-DIK</h4>
+                        <h4 class="text-center text-2xl font-extrabold tracking-tight">SiapBPKAD Mamuju</h4>
                         <p class="text-center text-sm text-gray-500 mt-1 mb-6">
-                            Sistem Informasi Administrasi Pengadaan dan Dokumen Izin-cuti Kepegawaian
+                            Sistem Informasi dokumen perizinan dan cuti kepegawaian dan kantoor BPKAD di Kabupaten
+                            Memuju
                         </p>
 
                         <form action="{{ route('login-store') }}" method="POST" class="space-y-4">
@@ -64,7 +65,7 @@
                             </div>
 
                             <button type="submit"
-                                class="w-full py-3 text-base font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                                class="w-full py-3 text-base font-semibold rounded-lg bg-[var(--primary)] text-white hover:brightness-90 hover:cursor-pointer transition">
                                 Login
                             </button>
                         </form>

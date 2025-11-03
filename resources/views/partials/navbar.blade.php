@@ -1,7 +1,7 @@
 @php
     $user = JWTAuth::parseToken()->authenticate();
 @endphp
-<header class="antialiased fixed right-0  w-full">
+<header class="antialiased fixed right-0  w-full z-200">
     <nav class="bg-white  border-b border-gray-200 px-4 py-3.5">
         <div class="flex flex-wrap justify-between items-center">
             <div class="flex justify-start items-center">
@@ -16,7 +16,7 @@
                         viewBox="0 0 17 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M1 1h15M1 7h15M1 13h15" />
-                    </svg>
+                    </svg>s
                     <span class="sr-only">Toggle sidebar</span>
                 </button>
 

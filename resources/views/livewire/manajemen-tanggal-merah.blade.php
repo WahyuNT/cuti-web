@@ -95,7 +95,7 @@
     @elseif($mode == 'edit')
         <div class="w-full">
             @if ($editId == null)
-                <h2 class="text-2xl font-bold text-center">Tambah Izin Baru</h2>
+                <h2 class="text-2xl font-bold text-center">Tambah Tanggal Merah Baru</h2>
             @else
                 <h2 class="text-2xl font-bold text-center">Edit Data {{ $tanggal }}</h2>
             @endif
