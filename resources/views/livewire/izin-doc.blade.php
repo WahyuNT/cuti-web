@@ -81,12 +81,12 @@
                 <tr>
                     <td style="vertical-align: top; padding: 5px 0;">Pangkat/Gol Ruang</td>
                     <td style="vertical-align: top; padding: 5px 0;">:</td>
-                    <td style="vertical-align: top; padding: 5px 0;">{{ $data['user']['pangkatRef']['name'] }}</td>
+                    <td style="vertical-align: top; padding: 5px 0;">{{ $data['user']['pangkatRef']['name'] ?? '' }}</td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top; padding: 5px 0;">Jabatan</td>
                     <td style="vertical-align: top; padding: 5px 0;">:</td>
-                    <td style="vertical-align: top; padding: 5px 0;">{{ $data['user']['jabatan']['name'] }}</td>
+                    <td style="vertical-align: top; padding: 5px 0;">{{ $data['user']['jabatan']['name'] ?? '' }}</td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top; padding: 5px 0;">Instansi</td>
@@ -111,7 +111,7 @@
                         <p style="margin: 5px 0;">Mamuju,
                             {{ \Carbon\Carbon::parse($data->updated_at)->locale('id')->isoFormat('D MMMM YYYY') }}
                         </p>
-                        <p style="margin: 5px 0;">{{ $data->user->jabatan->name }},</p>
+                        <p style="margin: 5px 0;">{{ $data->user->jabatan->name  ?? ''}},</p>
                         @if ($isPrint == true)
                             <img style="width: 90px; heigh:90px" alt=""
                                 src="data:image/png;base64, {!! $qrcode !!}">
@@ -119,7 +119,7 @@
                             {!! QrCode::format('svg')->size(90)->errorCorrection('H')->generate($data->user->name) !!}
                         @endif
                         <p style="margin: 5px 0; font-weight: bold;">{{ $data->user->name }}</p>
-                        <p style="margin: 5px 0;">Pangkat : {{ $data->user->pangkatRef->name }}</p>
+                        <p style="margin: 5px 0;">Pangkat : {{ $data->user->pangkatRef->name ?? '' }}</p>
                         <p style="margin: 5px 0;">NIP.{{ $data->user->nip }}</p>
                     </div>
                 </td>
